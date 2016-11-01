@@ -1,0 +1,7 @@
+---
+- name: install platform
+  hosts: platform
+  user: root
+  become: yes
+  roles:
+    - common

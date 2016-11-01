@@ -1,0 +1,22 @@
+---
+- name: add docker repository
+  apt_repository:
+    repo: 'deb http://http.debian.net/debian wheezy-backports main'
+    state: present
+
+- name: install ca-certificates package
+  apt:
+    name: ca-certificates
+    update_cache: yes
+    state: present
+
+- name: install apt-transport-https package
+  apt:
+    name: apt-transport-https
+    update_cache: yes
+    state: present
+
+- name: add docker gpg key
+  apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+  #  command: apt-get purge "lxc-docker*"
+  #  command: apt-get purge "docker.io*"

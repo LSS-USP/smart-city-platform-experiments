@@ -1,0 +1,5 @@
+[platform]
+data-collector ansible_host=104.131.90.0  ansible_user=root
+
+[debops_service_docker]
+data-collector ansible_host=104.131.90.0  ansible_user=root
