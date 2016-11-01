@@ -1,38 +1,40 @@
-# References: http://docs.ansible.com/ansible/docker_module.html
-
 ---
 
-- hosts: data-collector
-  roles:
-    - { role: debops.docker, tags: ["role::docker"] }
-  tasks:
-  - name: create data-collector service
-    docker_container:
-      name: data-collector
-      image: arthurmde/data-collector:0.1-0.1-exp1
-      state: started
-      links:
-      - 'postgres'
-      - 'redis'
-      volumes:
-      - /data-collector/
-      ports:
-      - "3000:3000"
-      env:
-        POSTGRES_USER: 'postgres'
-        POSTGRES_PASSWORD: 'admin'
+- name: create postgresql
+  docker_container:
+    name: data-collector-pg
+    image: postgres:9.5
+    env:
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'admin'
+    state: started
 
-  - name: create postgresql
-    docker_container:
-      name: data-collector-pg
-      image: postgres:9.5
-      env:
-        POSTGRES_USER: 'postgres'
-        POSTGRES_PASSWORD: 'admin'
-      state: started
+- name: create redis
+  docker_container:
+    name: data-collector-redis
+    image: redis
+    state: started
 
-  - name: create redis
-    docker_container:
-      name: data-collector-redis
-      image: redis
-      state: started
+- name: create data-collector service
+  docker_container:
+    name: data-collector
+    image: arthurmde/data-collector:0.1-0.2-exp1
+    state: started
+    links:
+    - 'data-collector-pg'
+    - 'data-collector-redis'
+    volumes:
+    - /data-collector/
+    ports:
+    - "3000:3000"
+    env:
+      RAILS_ENV: 'production'
+      POSTGRES_USER: 'postgres'
+      POSTGRES_PASSWORD: 'admin'
+      SECRET_KEY_BASE: 'admin'
+
+- name: create database
+  command: docker exec data-collector rake db:create
+
+- name: migrate database
+  command: docker exec data-collector rake db:migrate
