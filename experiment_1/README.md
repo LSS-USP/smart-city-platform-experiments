@@ -91,7 +91,21 @@ Constant low rate to each microservices
 
 # Running
 
+## Your PC - Experiment Manager:
 
-* Install ansible
-* Change ansible/hosts file to use your (Debian) hosts
-* Install debops.docker: `ansible-galaxy install debops.docker`
+* Install Python 2.7
+  * Most Linux distributions have python installed natively. To test, 
+  run on terminal: ```python --version```
+* [Install ansible](http://docs.ansible.com/ansible/intro_installation.html)
+* [Install pip](https://pip.pypa.io/en/stable/installing/)
+  * You can install pip using: ```easy_install pip```
+* Change [ansible/hosts](ansible/hosts) file to put your hosts IP
+
+## Remote hosts - Managed nodes:
+
+* In each managed node, pointed by [hosts](ansible/hosts), you need to
+communicate via **ssh** :
+  * Install python 2.4 or later
+  * Enable ssh communication
+  * Add you ssh public key to **root** user in remote hosts. [Here's an
+  example](https://www.digitalocean.com/community/tutorials/how-to-configure-ssh-key-based-authentication-on-a-linux-server)
