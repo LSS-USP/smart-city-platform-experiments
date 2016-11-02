@@ -1,14 +1,5 @@
 ---
 
-- name: create postgresql
-  docker_container:
-    name: data-collector-pg
-    image: postgres:9.5
-    env:
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'admin'
-    state: started
-
 - name: create redis
   docker_container:
     name: data-collector-redis
@@ -18,20 +9,23 @@
 - name: create data-collector service
   docker_container:
     name: data-collector
-    image: arthurmde/data-collector:0.1-0.2-exp1
+    image: "{{ docker_image }}"
     state: started
     links:
-    - 'data-collector-pg'
+    - 'postgres'
     - 'data-collector-redis'
     volumes:
     - /data-collector/
     ports:
     - "3000:3000"
     env:
-      RAILS_ENV: 'production'
-      POSTGRES_USER: 'postgres'
-      POSTGRES_PASSWORD: 'admin'
-      SECRET_KEY_BASE: 'admin'
+      RAILS_ENV: "{{ rails_env }}"
+      POSTGRES_HOST: "{{ postgres_host }}"
+      POSTGRES_PORT: "{{postgres_port}}"
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      SECRET_KEY_BASE: "{{ secret_key_base }}"
+      RABBITMQ_HOST: "{{ rabbitmq }}"
 
 - name: create database
   command: docker exec data-collector rake db:create

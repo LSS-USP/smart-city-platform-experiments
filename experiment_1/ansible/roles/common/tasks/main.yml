@@ -38,11 +38,11 @@
 - name: run docker default test
   command: docker run hello-world
 
-  #- name: install pip
-  #  easy_install: name=pip state=latest
-  #
-  #- name: install docker-compose
-  #  pip: name=docker-compose
-  #
+- name: install pip
+  easy_install: name=pip state=latest
+
+- name: install docker-py
+  pip: name=docker-py
+
   #- name: check docker-compose version
   #  command: docker-compose --version

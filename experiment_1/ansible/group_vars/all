@@ -1,0 +1,14 @@
+---
+
+# Hosts
+data_collector: 159.203.140.66
+resource_adaptor: 159.203.140.62
+resource_cataloguer: 159.203.140.69
+rabbitmq: 159.203.140.71
+
+# Postgresql 
+postgres_image: 'postgres:9.5'
+postgres_host: 'postgres'
+postgres_port: 5432
+postgres_user: 'postgres'
+postgres_password: 'admin'

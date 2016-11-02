@@ -1,5 +1,12 @@
 [platform]
-data-collector ansible_host=104.131.90.0  ansible_user=root
+data-collector ansible_host=159.203.140.66 ansible_user=root
+resouce-adaptor ansible_host=159.203.140.62 ansible_user=root
 
-[debops_service_docker]
-data-collector ansible_host=104.131.90.0  ansible_user=root
+[data-collector]
+data-collector ansible_host=159.203.140.66  ansible_user=root
+
+[resource-adaptor]
+resouce-adaptor ansible_host=159.203.140.62 ansible_user=root
+
+[rabbitmq]
+rabbitmq ansible_host=159.203.140.71 ansible_user=root
