@@ -52,7 +52,7 @@
   * CPU: 1
   * RAM: 512 MB
 * City Workload Agent
-  * VM6
+  * VM7
   * DISK: 20 GB
   * CPU: 1
   * RAM: 512 MB
@@ -88,3 +88,10 @@ Constant low rate to each microservices
 
 ## Results
 
+
+# Running
+
+
+* Install ansible
+* Change ansible/hosts file to use your (Debian) hosts
+* Install debops.docker: `ansible-galaxy install debops.docker`
