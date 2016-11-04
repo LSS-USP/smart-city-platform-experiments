@@ -1,10 +1,15 @@
 ---
 
 # Hosts
-data_collector: 159.203.140.66
-resource_adaptor: 159.203.140.62
-resource_cataloguer: 159.203.140.69
-rabbitmq: 159.203.140.71
+data_collector: 104.131.7.60
+resource_adaptor: 159.203.132.242
+resource_cataloguer: 104.236.110.3
+rabbitmq: 159.203.138.10
+
+# Posts
+data_collector_port: 3000
+resource_adaptor_port: 3000
+resource_cataloguer_port: 3000
 
 # Postgresql 
 postgres_image: 'postgres:9.5'

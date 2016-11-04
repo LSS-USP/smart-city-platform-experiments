@@ -1,14 +1,14 @@
 ---
 
-- name: create resource-adaptor service
+- name: create resource-cataloguer API service
   docker_container:
-    name: resource-adaptor
+    name: resource-cataloguer
     image: "{{ docker_image }}"
     state: started
     links:
     - 'postgres'
     volumes:
-      - /resource-adaptor/
+    - /resource-cataloguer/
     ports:
     - "3000:3000"
     env:
@@ -19,11 +19,14 @@
       POSTGRES_PASSWORD: "{{ postgres_password }}"
       SECRET_KEY_BASE: "{{ secret_key_base }}"
       RABBITMQ_HOST: "{{ rabbitmq }}"
-      CATALOGUER_HOST: "{{ resource_cataloguer }}:{{ resource_cataloguer_port }}"
-      ADAPTOR_HOST: "{{ resource_adaptor }}:{{ resource_adaptor_port }}"
+      DATACOLLECTOR_HOST: "{{ data_collector }}:{{ data_collector_port }}"
+      ACTUATORCONTROLLER_HOST: "actuator"
 
 - name: create database
-  command: docker exec resource-adaptor rake db:create
+  command: docker exec resource-cataloguer rake db:create
 
 - name: migrate database
-  command: docker exec resource-adaptor rake db:migrate
+  command: docker exec resource-cataloguer rake db:migrate
+
+- name: seed database
+  command: docker exec resource-cataloguer rake db:seed

@@ -33,3 +33,10 @@
   become: yes
   roles:
     - resource-adaptor
+
+- name: setup resource-cataloguer
+  hosts: resource-cataloguer
+  user: root
+  become: yes
+  roles:
+    - resource-cataloguer

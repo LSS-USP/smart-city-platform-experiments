@@ -5,5 +5,5 @@
     name: rabbitmq
     image: rabbitmq:3.6.5
     ports:
-    - "15672:15672"
+    - "5672:5672"
     state: started
