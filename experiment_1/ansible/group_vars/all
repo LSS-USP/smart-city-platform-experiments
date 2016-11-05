@@ -1,10 +1,10 @@
 ---
 
 # Hosts
-data_collector: 104.131.7.60
-resource_adaptor: 159.203.132.242
-resource_cataloguer: 104.236.110.3
-rabbitmq: 159.203.138.10
+data_collector: hostvars['data-collector']['ansible_host']
+resource_adaptor: hostvars['resource-adaptor']['ansible_host']
+resource_cataloguer: hostvars['resource-cataloguer']['ansible_host']
+rabbitmq: hostvars['rabbitmq']['ansible_host']
 
 # Posts
 data_collector_port: 3000
