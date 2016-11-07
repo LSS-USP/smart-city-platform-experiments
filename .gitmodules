@@ -1,0 +1,3 @@
+[submodule "experiment_1/platform_scalability_tests"]
+	path = experiment_1/platform_scalability_tests
+	url = git@github.com:arthurmde/platform_scalability_test.git
