@@ -1,3 +1,6 @@
 [submodule "experiment_1/platform_scalability_tests"]
 	path = experiment_1/platform_scalability_tests
 	url = git@github.com:arthurmde/platform_scalability_test.git
+[submodule "experiment_1/benchmark"]
+	path = experiment_1/benchmark
+	url = git@gitlab.com:smart-city-software-platform/benchmark.git
