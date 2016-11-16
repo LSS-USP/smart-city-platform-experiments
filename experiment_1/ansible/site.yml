@@ -20,13 +20,6 @@
   roles:
     - rabbitmq
 
-- name: setup data-collector
-  hosts: data-collector
-  user: root
-  become: yes
-  roles:
-    - data-collector
-
 - name: setup resource-adaptor
   hosts: resource-adaptor
   user: root
@@ -40,3 +33,10 @@
   become: yes
   roles:
     - resource-cataloguer
+
+- name: setup data-collector
+  hosts: data-collector
+  user: root
+  become: yes
+  roles:
+    - data-collector

@@ -1,6 +1,8 @@
 ---
 - name: Cpu and memory monitoring
-  hosts: all
+  hosts:
+    - platform
+    - rabbitmq
   user: root
   become: yes
   roles:
