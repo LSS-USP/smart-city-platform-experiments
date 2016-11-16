@@ -1,0 +1,10 @@
+---
+- name: configure explorer
+  hosts: explorer
+  user: root
+  become: yes
+  roles:
+    - { role: rvm_io.rvm1-ruby,
+        tags: ruby,
+        rvm1_rubies: ['ruby-2.3.1'],
+      }

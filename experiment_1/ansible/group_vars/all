@@ -1,10 +1,10 @@
 ---
 
 # Hosts
-data_collector: 104.131.176.143 
-resource_adaptor: 104.131.70.11
-resource_cataloguer: 104.131.84.173
-rabbitmq: 104.131.68.47
+data_collector: 159.203.132.141
+resource_adaptor: 45.55.84.167
+resource_cataloguer: 104.236.109.135
+rabbitmq: 45.55.200.208
 
 # Posts
 data_collector_port: 3000
@@ -17,3 +17,7 @@ postgres_host: 'postgres'
 postgres_port: 5432
 postgres_user: 'postgres'
 postgres_password: 'admin'
+
+# Collectl
+collecting_time: 1m
+collecting_interval: 5

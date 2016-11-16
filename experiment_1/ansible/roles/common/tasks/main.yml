@@ -16,6 +16,16 @@
     update_cache: yes
     state: present
 
+- name: Install vim
+  package: name=vim state=present
+
+- name: Install git
+  package: name=git state=present
+
+- name: Install collectl
+  apt: name=collectl update_cache=yes state=latest cache_valid_time=3600
+  register: installcollectl
+
 - name: add docker gpg key
   apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
 
