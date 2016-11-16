@@ -100,6 +100,33 @@ Constant low rate to each microservices
 * [Install pip](https://pip.pypa.io/en/stable/installing/)
   * You can install pip using: ```easy_install pip```
 * Change [ansible/hosts](ansible/hosts) file to put your hosts IP
+* Install ansible extra modules:
+  * RVM: `sudo nsible-galaxy install rvm_io.rvm1-ruby`
+
+### Install collectl visualization tool - colplot:
+
+Based on [this tutorial](http://www.krazyworks.com/collectl-colplot-sytem-performance-analysis-tools/)
+
+* Install apache2: `sudo apt-get install apache2`
+* Install collectl: `sudo apt-get install collectl`
+* Install colplot:
+```
+v="5.0.0"
+cd /tmp
+wget http://downloads.sourceforge.net/project/collectl/Colplot/colplot-${v}.src.tar.gz
+gzip -d colplot-${v}.src.tar.gz
+tar xvf colplot-${v}.src.tar
+cd colplot-${v}
+sudo ./INSTALL
+```
+* Configure apache2:
+
+```
+logdir=/opt/colplot/logs
+sudo mkdir -p "${logdir}"
+sudo chown -R www-data:www-data "${logdir}"
+```
+* Restart apache2: `sudo service apache2 restart`
 
 ## Remote hosts - Managed nodes:
 
