@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  redis:
+    image: 'redis'
+    container_name: benchmark-redis
+  sidekiq:
+    container_name: benchmark-sidekiq
+    links:
+      - 'redis'
+    build: .
+    command: sidekiq -r ./environment.rb
+    volumes:
+      - '.:/benchmark'
+    environment:
+      ADAPTOR_HOST: 'resource-adaptor:3000'
+      REDIS_HOST: 'benchmark-redis' 
+      REDIS_PORT: '6379' 
+  benchmark:
+    container_name: benchmark 
+    build: .
+    command: ruby ./src/main.rb
+    links:
+      - 'redis'
+    volumes:
+      - '.:/benchmark'
+    environment:
+      ADAPTOR_HOST: 'resource-adaptor:3000' 
+      REDIS_HOST: 'benchmark-redis' 
+      REDIS_PORT: '6379' 
+
+networks:
+  default:
+    external:
+      name: platform 

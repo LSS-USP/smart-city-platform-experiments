@@ -1,0 +1,8 @@
+require 'yaml'
+require 'rake'
+
+begin
+  load 'local.rake'
+rescue LoadError
+  # nothing
+end

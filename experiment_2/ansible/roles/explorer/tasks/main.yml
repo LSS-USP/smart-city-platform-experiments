@@ -1,0 +1,33 @@
+---
+- name: clone git repository
+  git:
+    repo: https://gitlab.com/smart-city-software-platform/benchmark.git
+    dest: /srv/benchmark
+    version: experiment2
+
+- name: Receive rvm keys
+  shell: "gpg --keyserver hkp://keys.gnupg.net --recv-keys 409B6B1796C275462A1703113804BB82D39DC0E3"
+
+- name: Install RVM
+  shell: "curl -sSL https://get.rvm.io | bash"
+
+- name: install ruby 2.3.1
+  shell: 'bash -lc "rvm install 2.3.1 --default"'
+  args:
+    chdir: /srv/benchmark
+
+- name: install rake
+  shell: 'bash -lc "gem install rake"'
+  args:
+    chdir: /srv/benchmark
+
+- name: install bundler
+  shell: 'bash -lc "gem install bundler"'
+  args:
+    chdir: /srv/benchmark
+
+- name: install dependencies
+  ignore_errors: yes
+  shell: 'bash -lc "bundle install"'
+  args:
+    chdir: /srv/benchmark

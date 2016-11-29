@@ -1,0 +1,24 @@
+---
+- name: clone git repository
+  git:
+    repo: https://gitlab.com/smart-city-software-platform/benchmark.git
+    dest: /srv/benchmark
+
+- name: install rake
+  shell: gem install rake
+  args:
+    chdir: /srv/benchmark
+    executable: /bin/bash
+
+- name: install bundler
+  shell: gem install bundler
+  args:
+    chdir: /srv/benchmark
+    executable: /bin/bash
+
+- name: install dependencies
+  ignore_errors: yes
+  shell: bundle install
+  args:
+    chdir: /srv/benchmark
+    executable: /bin/bash

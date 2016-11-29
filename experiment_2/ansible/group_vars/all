@@ -1,0 +1,32 @@
+---
+
+# Hosts
+data_collector: 10.132.81.107
+resource_adaptor: 10.132.68.166
+resource_cataloguer: 10.132.72.241
+rabbitmq: 10.132.84.116
+
+# Posts
+data_collector_port: 3000
+resource_adaptor_port: 3000
+resource_cataloguer_port: 3000
+
+# Postgresql 
+postgres_image: 'postgres:9.5'
+postgres_host: 'postgres'
+postgres_port: 5432
+postgres_user: 'postgres'
+postgres_password: 'admin'
+
+# Collectl
+collecting_time: 1m
+collecting_interval: 5
+
+# Explorer
+benchmark_task: run
+experiment_actors: 64
+experiment_requests: 50
+experiment_time: 10
+experiment_number: 1
+experiment_interval: 1
+max_number: 1025

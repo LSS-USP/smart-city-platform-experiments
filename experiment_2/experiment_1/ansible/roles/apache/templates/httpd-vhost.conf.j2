@@ -1,0 +1,44 @@
+# Virtual Hosts
+#
+# Required modules: mod_log_config
+
+# If you want to maintain multiple domains/hostnames on your
+# machine you can setup VirtualHost containers for them. Most configurations
+# use only name-based virtual hosts so the server doesn't need to worry about
+# IP addresses. This is indicated by the asterisks in the directives below.
+#
+# Please see the documentation at 
+# <URL:http://httpd.apache.org/docs/2.4/vhosts/>
+# for further details before you try to setup virtual hosts.
+#
+# You may use the command line option '-S' to verify your virtual host
+# configuration.
+
+#
+# VirtualHost example:
+# Almost any Apache directive may go into a VirtualHost container.
+# The first VirtualHost section is used for all requests that do not
+# match a ServerName or ServerAlias in any <VirtualHost> block.
+#
+<VirtualHost *:80>
+    ServerAdmin siqueira@ime.usp.br
+    DocumentRoot "/srv/http/benchmark"
+    ServerName benchmark-lss.com
+    ServerAlias www.benchmark-lss.com
+    ErrorLog {{ item }}error_log
+    CustomLog {{ item }}general common
+    <Directory "/srv/http/benchmark">
+      Order allow,deny
+      Allow from all
+      Require all granted
+      AddHandler mod_python .py
+      PythonHandler mod_python.publisher
+      PythonDebug On
+    </Directory>
+    <IfModule mod_fastcgi.c>
+      AddHandler php7-fcgi .php
+      Action php7-fcgi /php7-fcgi virtual
+      Alias /php7-fcgi /usr/lib/cgi-bin/php7-fcgi
+      FastCgiExternalServer /usr/lib/cgi-bin/php7-fcgi -socket /var/run/php/php7.0-fpm.sock -pass-header Authorization
+    </IfModule>
+</VirtualHost>

@@ -1,0 +1,43 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    concurrent-ruby (1.0.2)
+    connection_pool (2.2.0)
+    domain_name (0.5.20161021)
+      unf (>= 0.0.5, < 1.0.0)
+    http-cookie (1.0.3)
+      domain_name (~> 0.5)
+    mime-types (3.1)
+      mime-types-data (~> 3.2015)
+    mime-types-data (3.2016.0521)
+    netrc (0.11.0)
+    rack (2.0.1)
+    rack-protection (1.5.3)
+      rack
+    redis (3.3.1)
+    redis-namespace (1.5.2)
+      redis (~> 3.0, >= 3.0.4)
+    rest-client (2.0.0)
+      http-cookie (>= 1.0.2, < 2.0)
+      mime-types (>= 1.16, < 4.0)
+      netrc (~> 0.8)
+    sidekiq (4.2.5)
+      concurrent-ruby (~> 1.0)
+      connection_pool (~> 2.2, >= 2.2.0)
+      rack-protection (>= 1.5.0)
+      redis (~> 3.2, >= 3.2.1)
+    unf (0.1.4)
+      unf_ext
+    unf_ext (0.0.7.2)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  redis
+  redis-namespace
+  rest-client
+  sidekiq
+
+BUNDLED WITH
+   1.13.3

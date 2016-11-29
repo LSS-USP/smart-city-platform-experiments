@@ -1,0 +1,15 @@
+resource-adaptor:
+  base_uris:
+    - http://104.131.70.11:3000
+  base_path:
+    /
+resource-cataloguer:
+  base_uris:
+    - http://104.131.84.173:3000
+  base_path:
+    /
+data-collector:
+  base_uris:
+    - http://104.131.176.143:3000
+  base_path:
+    /

@@ -1,0 +1,11 @@
+type: Degradation
+requestsPerStep: 1
+numberOfSteps: 8
+initialCapacityValue:
+increaseCapacityFunction:
+increaseCapacityFunctionParameter:
+initialWorkloadValue: 1
+increaseWorkloadFunction: quadratic
+increaseWorkloadFunctionParameter: 3
+plotGraph: true
+experientName: REST.ResourceDataStream
