@@ -1,9 +1,0 @@
----
-
-- name: create rabbitmq service
-  docker_container:
-    name: rabbitmq
-    image: rabbitmq:3.6.5
-    ports:
-    - "5672:5672"
-    state: started

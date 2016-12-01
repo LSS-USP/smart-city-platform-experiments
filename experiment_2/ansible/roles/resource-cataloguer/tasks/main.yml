@@ -5,6 +5,7 @@
     name: resource-cataloguer
     image: "{{ docker_image }}"
     state: started
+    recreate: yes
     links:
     - 'postgres'
     volumes:

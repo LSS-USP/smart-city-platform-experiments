@@ -1,8 +1,0 @@
----
-- name: Start data collect
-  command: "collectl -scmsd -i {{ collecting_interval }} -R {{ collecting_time }} -oDm -P -f/tmp"
-  register: finishcollect
-
-- name: Copy results
-  when: finishcollect|success
-  synchronize: src=/tmp/*tab.gz dest=/tmp/ mode=pull

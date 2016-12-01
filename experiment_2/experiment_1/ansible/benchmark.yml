@@ -1,7 +1,0 @@
----
-- name: benchmark platform
-  hosts: explorer
-  user: root
-  become: yes
-  roles:
-    - benchmark

@@ -1,4 +1,0 @@
----
-docker_image: arthurmde/data-collector:0.1-1.01-exp1
-rails_env: production
-secret_key_base: 'admin'

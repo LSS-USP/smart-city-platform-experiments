@@ -27,4 +27,4 @@ benchmark_task: load
 experiment_actors: 20000
 experiment_requests: 50
 experiment_time: 60
-experiment_number: 10
+experiment_number: 20

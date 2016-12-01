@@ -1,5 +1,0 @@
----
-
-services:
-  catalog: <%= ENV['CATALOGUER_HOST'] %>
-  adaptor: <%= ENV['ADAPTOR_HOST'] %>

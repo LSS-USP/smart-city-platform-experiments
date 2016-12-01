@@ -1,4 +1,0 @@
----
-docker_image: arthurmde/resource-adaptor:0.1-0.4-exp1
-rails_env: production
-secret_key_base: 'admin'

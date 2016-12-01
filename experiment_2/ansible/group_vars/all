@@ -1,10 +1,10 @@
 ---
 
 # Hosts
-data_collector: 10.132.81.107
-resource_adaptor: 10.132.68.166
-resource_cataloguer: 10.132.72.241
-rabbitmq: 10.132.84.116
+data_collector: 10.132.93.233
+resource_adaptor: 10.132.17.103
+resource_cataloguer: 10.132.93.231
+rabbitmq: 10.132.93.234
 
 # Posts
 data_collector_port: 3000
@@ -24,7 +24,7 @@ collecting_interval: 5
 
 # Explorer
 benchmark_task: run
-experiment_actors: 64
+experiment_actors: 1024
 experiment_requests: 50
 experiment_time: 10
 experiment_number: 1
