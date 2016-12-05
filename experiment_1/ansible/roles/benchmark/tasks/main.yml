@@ -1,6 +1,6 @@
 ---
 - name: run experiment
-  shell: "rake benchmark:{{ benchmark_task }}"
+  shell: 'bash -lc "rake benchmark:{{ benchmark_task }}"'
   args:
     chdir: /srv/benchmark
     executable: /bin/bash
@@ -10,9 +10,11 @@
     EXPERIMENT_REQUESTS: "{{ experiment_requests }}" 
     EXPERIMENT_TIME: "{{ experiment_time }}" 
     EXPERIMENT_NUMBER: "{{ experiment_number }}"
+    EXPERIMENT_CYCLES: "{{ experiment_cycles }}" 
+    EXPERIMENT_WAIT: "{{ experiment_cycles_wait }}" 
   register: run
 
 - debug: var=run.stdout_lines
 
 - name: synchronize files
-  synchronize: src=/srv/benchmark/results/output.csv dest=/tmp/ mode=pull
+  synchronize: src=/srv/benchmark/results/* dest=/tmp/experiment/ mode=pull

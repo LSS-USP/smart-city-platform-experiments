@@ -1,0 +1,10 @@
+---
+
+- name: create postgresql
+  docker_container:
+    name: postgres
+    image: "{{ postgres_image }}"
+    env:
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+    state: started

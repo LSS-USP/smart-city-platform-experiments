@@ -1,0 +1,33 @@
+---
+
+- name: create resource-cataloguer API service
+  docker_container:
+    name: resource-cataloguer
+    image: "{{ docker_image }}"
+    state: started
+    recreate: yes
+    links:
+    - 'postgres'
+    volumes:
+    - /resource-cataloguer/
+    ports:
+    - "3000:3000"
+    env:
+      RAILS_ENV: "{{ rails_env }}"
+      POSTGRES_HOST: "{{ postgres_host }}"
+      POSTGRES_PORT: "{{postgres_port}}"
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      SECRET_KEY_BASE: "{{ secret_key_base }}"
+      RABBITMQ_HOST: "{{ rabbitmq }}"
+      DATACOLLECTOR_HOST: "{{ data_collector }}:{{ data_collector_port }}"
+      ACTUATORCONTROLLER_HOST: "actuator"
+
+- name: create database
+  command: docker exec resource-cataloguer rake db:create
+
+- name: migrate database
+  command: docker exec resource-cataloguer rake db:migrate
+
+- name: seed database
+  command: docker exec resource-cataloguer rake db:seed

@@ -1,0 +1,7 @@
+---
+- name: setup explorers
+  hosts: explorer
+  user: root
+  become: yes
+  roles:
+    - explorer

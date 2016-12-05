@@ -1,0 +1,7 @@
+---
+- name: reboot hosts
+  hosts: all
+  user: root
+  become: yes
+  roles:
+    - reboot

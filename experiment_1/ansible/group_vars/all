@@ -1,10 +1,10 @@
 ---
 
 # Hosts
-data_collector: 138.197.20.204
-resource_adaptor: 159.203.129.71
-resource_cataloguer: 159.203.129.119
-rabbitmq: 138.197.28.0
+data_collector: 10.132.20.249
+resource_adaptor: 45.55.171.88
+resource_cataloguer: 10.132.14.73
+rabbitmq: 10.132.1.132
 
 # Posts
 data_collector_port: 3000
@@ -26,5 +26,7 @@ collecting_interval: 5
 benchmark_task: load
 experiment_actors: 20000
 experiment_requests: 50
-experiment_time: 60
-experiment_number: 20
+experiment_cycles: "8:16:32:64"
+experiment_cycles_wait: 60
+experiment_time: 300
+experiment_number: 1

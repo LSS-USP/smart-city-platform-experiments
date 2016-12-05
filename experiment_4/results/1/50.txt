@@ -1,0 +1,29 @@
+httperf --hog --timeout=1 --client=0/1 --server=10.132.18.17 --port=3000 --uri=/components/f06a96e2-3936-441c-8239-853bfd59959f/data --rate=50 --send-buffer=4096 --recv-buffer=16384 --add-header='Accept: application/json\nContent-Type: application/json\n' --method=POST --wsesslog=18000,0.000,/srv/benchmark/httperf/temperature
+Maximum connect burst length: 1
+
+Total: connections 18000 requests 18000 replies 18000 test-duration 359.985 s
+
+Connection rate: 50.0 conn/s (20.0 ms/conn, <=2 concurrent connections)
+Connection time [ms]: min 2.7 avg 4.5 max 33.1 median 4.5 stddev 1.1
+Connection time [ms]: connect 0.5
+Connection length [replies/conn]: 1.000
+
+Request rate: 50.0 req/s (20.0 ms/req)
+Request size [B]: 273.0
+
+Reply rate [replies/s]: min 49.8 avg 50.0 max 50.0 stddev 0.0 (72 samples)
+Reply time [ms]: response 4.0 transfer 0.0
+Reply size [B]: header 363.0 content 2.0 footer 2.0 (total 367.0)
+Reply status: 1xx=0 2xx=18000 3xx=0 4xx=0 5xx=0
+
+CPU time [s]: user 67.50 system 292.46 (user 18.8% system 81.2% total 100.0%)
+Net I/O: 31.2 KB/s (0.3*10^6 bps)
+
+Errors: total 0 client-timo 0 socket-timo 0 connrefused 0 connreset 0
+Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
+
+Session rate [sess/s]: min 49.80 avg 50.00 max 50.01 stddev 0.02 (18000/18000)
+Session: avg 1.00 connections/session
+Session lifetime [s]: 0.0
+Session failtime [s]: 0.0
+Session length histogram: 0 18000

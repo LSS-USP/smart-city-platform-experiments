@@ -1,0 +1,29 @@
+httperf --hog --timeout=1 --client=0/1 --server=10.132.18.17 --port=3000 --uri=/components/f06a96e2-3936-441c-8239-853bfd59959f/data --rate=250 --send-buffer=4096 --recv-buffer=16384 --add-header='Accept: application/json\nContent-Type: application/json\n' --method=POST --wsesslog=90000,0.000,/srv/benchmark/httperf/temperature
+Maximum connect burst length: 1
+
+Total: connections 90000 requests 47618 replies 47618 test-duration 360.996 s
+
+Connection rate: 249.3 conn/s (4.0 ms/conn, <=253 concurrent connections)
+Connection time [ms]: min 2.3 avg 53.4 max 1545.6 median 3.5 stddev 167.8
+Connection time [ms]: connect 23.2
+Connection length [replies/conn]: 1.000
+
+Request rate: 131.9 req/s (7.6 ms/req)
+Request size [B]: 273.0
+
+Reply rate [replies/s]: min 0.0 avg 131.7 max 262.4 stddev 122.9 (72 samples)
+Reply time [ms]: response 30.3 transfer 0.0
+Reply size [B]: header 363.0 content 2.0 footer 2.0 (total 367.0)
+Reply status: 1xx=0 2xx=47618 3xx=0 4xx=0 5xx=0
+
+CPU time [s]: user 27.72 system 333.09 (user 7.7% system 92.3% total 99.9%)
+Net I/O: 82.2 KB/s (0.7*10^6 bps)
+
+Errors: total 42382 client-timo 42382 socket-timo 0 connrefused 0 connreset 0
+Errors: fd-unavail 0 addrunavail 0 ftab-full 0 other 0
+
+Session rate [sess/s]: min 0.00 avg 131.91 max 262.42 stddev 122.92 (47618/90000)
+Session: avg 1.00 connections/session
+Session lifetime [s]: 0.1
+Session failtime [s]: 1.0
+Session length histogram: 42382 47618
