@@ -1,0 +1,46 @@
+---
+- name: add docker gpg key
+  apt_key: keyserver=hkp://p80.pool.sks-keyservers.net:80 id=58118E89F3A912897C070ADBF76221572C52609D
+
+- name: add docker repository
+  apt_repository:
+    repo: 'deb https://apt.dockerproject.org/repo debian-jessie main'
+    state: present
+
+- name: install docker-engine
+  apt:
+    name: docker-engine
+    update_cache: yes
+    state: present
+
+- name: start docker daemon
+  service:
+    name: docker
+    state: started
+
+- name: run docker default test
+  command: docker run hello-world
+
+- name: install pip
+  easy_install: name=pip state=latest
+
+- name: install docker-py
+  pip: name=docker-py
+
+  #- name: check docker-compose version
+  #  command: docker-compose --version
+
+- name: create nf_conntrack file
+  shell: 'sysctl -w net.netfilter.nf_conntrack_max=200000'
+
+- name: tunning nf_conntrack
+  sysctl:
+    name: net.netfilter.nf_conntrack_count
+    value: 200000
+    state: present
+
+- name: tunning nf_conntrack hashsize
+  shell: 'echo 50000 > /sys/module/nf_conntrack/parameters/hashsize'
+
+- name: apply tunning
+  shell: 'sysctl -p'

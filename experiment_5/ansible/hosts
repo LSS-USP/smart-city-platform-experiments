@@ -1,0 +1,25 @@
+[platform]
+data-collector ansible_host=104.236.68.54 ansible_user=root
+resouce-adaptor-1 ansible_host=104.236.24.207 ansible_user=root
+resouce-adaptor-2 ansible_host=104.236.26.186 ansible_user=root
+resouce-cataloguer ansible_host=104.236.43.84 ansible_user=root
+
+[data-collector]
+data-collector ansible_host=104.236.68.54 ansible_user=root
+
+[resource-adaptor]
+resouce-adaptor-1 ansible_host=104.236.24.207 ansible_user=root
+resouce-adaptor-2 ansible_host=104.236.26.186 ansible_user=root
+
+[resource-cataloguer]
+resouce-cataloguer ansible_host=104.236.43.84 ansible_user=root
+
+[rabbitmq]
+rabbitmq ansible_host=104.236.96.136 ansible_user=root
+
+[explorer]
+45.55.41.136 ansible_user=root
+
+[nginx]
+nginx ansible_host=104.131.79.14 ansible_user=root
+

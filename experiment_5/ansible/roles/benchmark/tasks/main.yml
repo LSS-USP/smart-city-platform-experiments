@@ -1,0 +1,11 @@
+---
+#- name: run experiment
+#  shell: 'taskset -c 0 fl-run-bench test_Simple.py Simple.test_simple'
+#  args:
+#    chdir: /srv/benchmark/funkload-bench
+#  register: run
+#
+#- debug: var=run.stdout_lines
+
+- name: synchronize files
+  synchronize: src=/srv/benchmark/funkload-bench/simple-bench.xml dest=/tmp/ mode=pull

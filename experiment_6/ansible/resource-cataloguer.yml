@@ -1,0 +1,21 @@
+---
+- name: install basic setup
+  hosts: resource-cataloguer
+  user: root
+  become: yes
+  roles:
+    - common
+
+- name: install postgres
+  hosts: resource-cataloguer
+  user: root
+  become: yes
+  roles:
+    - postgres
+
+- name: setup resource-cataloguer
+  hosts: resource-cataloguer
+  user: root
+  become: yes
+  roles:
+    - resource-cataloguer

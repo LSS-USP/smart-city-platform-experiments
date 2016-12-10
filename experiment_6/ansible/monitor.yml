@@ -1,0 +1,11 @@
+---
+- name: Cpu and memory monitoring
+  hosts:
+    - platform
+    - rabbitmq
+    - explorer
+    - nginx
+  user: root
+  become: yes
+  roles:
+    - hardware_monitoring
