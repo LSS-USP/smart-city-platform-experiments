@@ -132,13 +132,41 @@ general = Nokogiri::XML::Builder.new(encoding: 'UTF-8') do |xml|
                   end
                   xml.rotating true
                   xml.rotating_rules do
-                    xml.tempo_cartao record.attributes['r1TempoCar']
-                    xml.inicio_seg_sex record.attributes['r1Inic2a6a']
-                    xml.fim_seg_sex record.attributes['r1Term2a6a']
-                    xml.inicio_sab record.attributes['r1InicSab']
-                    xml.fim_sab record.attributes['r1TermSab']
-                    xml.inicio_dom record.attributes['r1InicDom']
-                    xml.fim_dom record.attributes['r1TermDom']
+                    rule_id = record.attributes['idRegra1']
+                    valid_rule = rule_id != 0
+                    xml.rule(number: "1", active: valid_rule, rule_id: rule_id) do
+                      xml.tempo_cartao record.attributes['r1TempoCar']
+                      xml.inicio_seg_sex record.attributes['r1Inic2a6a']
+                      xml.fim_seg_sex record.attributes['r1Term2a6a']
+                      xml.inicio_sab record.attributes['r1InicSab']
+                      xml.fim_sab record.attributes['r1TermSab']
+                      xml.inicio_dom record.attributes['r1InicDom']
+                      xml.fim_dom record.attributes['r1TermDom']
+                    end
+
+                    rule_id = record.attributes['idRegra2']
+                    valid_rule = rule_id != 0
+                    xml.rule(number: "2", active: valid_rule, rule_id: rule_id) do
+                      xml.tempo_cartao record.attributes['r2TempoCar']
+                      xml.inicio_seg_sex record.attributes['r2Inic2a6a']
+                      xml.fim_seg_sex record.attributes['r2Term2a6a']
+                      xml.inicio_sab record.attributes['r2InicSab']
+                      xml.fim_sab record.attributes['r2TermSab']
+                      xml.inicio_dom record.attributes['r2InicDom']
+                      xml.fim_dom record.attributes['r2TermDom']
+                    end
+
+                    rule_id = record.attributes['idRegra3']
+                    valid_rule = rule_id != 0
+                    xml.rule(number: "3", active: valid_rule, rule_id: rule_id) do
+                      xml.tempo_cartao record.attributes['r3TempoCar']
+                      xml.inicio_seg_sex record.attributes['r3Inic2a6a']
+                      xml.fim_seg_sex record.attributes['r3Term2a6a']
+                      xml.inicio_sab record.attributes['r3InicSab']
+                      xml.fim_sab record.attributes['r3TermSab']
+                      xml.inicio_dom record.attributes['r3InicDom']
+                      xml.fim_dom record.attributes['r3TermDom']
+                    end
                   end
                 end
               end
