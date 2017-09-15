@@ -1,0 +1,21 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    google_places (0.34.2)
+      httparty (>= 0.13.1, < 0.14.1)
+    httparty (0.14.0)
+      multi_xml (>= 0.5.2)
+    mini_portile2 (2.2.0)
+    multi_xml (0.6.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  google_places
+  nokogiri
+
+BUNDLED WITH
+   1.14.6
