@@ -1,4 +1,4 @@
 *.retry
 .metadata/
 RemoteSystemsTempFiles
-datasets/
+other_datasets/
