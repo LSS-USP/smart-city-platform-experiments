@@ -1,0 +1,50 @@
+ab -r -p files/jsons/temperature.json -T application/json -t 240 -n 10000000 -c 1500 -s 60 -e results/c3.csv http://45.55.82.74:80/components/7a9797da-2bd0-4830-a0d6-908478d35bb0/data
+This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 45.55.82.74 (be patient)
+Finished 140792 requests
+
+
+Server Software:        nginx/1.6.2
+Server Hostname:        45.55.82.74
+Server Port:            80
+
+Document Path:          /components/7a9797da-2bd0-4830-a0d6-908478d35bb0/data
+Document Length:        2 bytes
+
+Concurrency Level:      1500
+Time taken for tests:   240.000 seconds
+Complete requests:      140792
+Failed requests:        228
+   (Connect: 0, Receive: 0, Length: 228, Exceptions: 0)
+Non-2xx responses:      228
+Total transferred:      58584700 bytes
+Total body sent:        37280242
+HTML transferred:       615274 bytes
+Requests per second:    586.63 [#/sec] (mean)
+Time per request:       2556.965 [ms] (mean)
+Time per request:       1.705 [ms] (mean, across all concurrent requests)
+Transfer rate:          238.38 [Kbytes/sec] received
+                        151.69 kb/s sent
+                        390.08 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1   9.5      0     999
+Processing:     3 2489 4802.2    782   91119
+Waiting:        3 2489 4802.2    782   91119
+Total:          3 2490 4802.2    783   91119
+
+Percentage of the requests served within a certain time (ms)
+  50%    783
+  66%   1871
+  75%   3083
+  80%   3524
+  90%   4711
+  95%   8805
+  98%  16072
+  99%  28012
+ 100%  91119 (longest request)
+

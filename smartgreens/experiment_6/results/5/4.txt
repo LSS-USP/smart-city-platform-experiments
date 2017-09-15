@@ -1,0 +1,98 @@
+ab -r -p files/jsons/temperature.json -T application/json -t 240 -n 10000000 -c 1000 -s 60 -e results/c4.csv http://159.203.132.129:80/components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 159.203.132.129 (be patient)
+Finished 184829 requests
+
+
+Server Software:        nginx/1.6.2
+Server Hostname:        159.203.132.129
+Server Port:            80
+
+Document Path:          /components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+Document Length:        2 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   240.002 seconds
+Complete requests:      184829
+Failed requests:        0
+Total transferred:      76519206 bytes
+Total body sent:        49430248
+HTML transferred:       369658 bytes
+Requests per second:    770.12 [#/sec] (mean)
+Time per request:       1298.507 [ms] (mean)
+Time per request:       1.299 [ms] (mean, across all concurrent requests)
+Transfer rate:          311.36 [Kbytes/sec] received
+                        201.13 kb/s sent
+                        512.49 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2  44.2      0    3001
+Processing:     3 1232 4066.0    354  120162
+Waiting:        3 1232 4066.0    354  120161
+Total:          3 1234 4067.8    354  120162
+
+Percentage of the requests served within a certain time (ms)
+  50%    354
+  66%    535
+  75%    746
+  80%   1043
+  90%   2023
+  95%   4044
+  98%   9093
+  99%  16033
+ 100%  120162 (longest request)
+
+ ===========================================================================
+
+ab -r -p files/jsons/temperature.json -T application/json -t 240 -n 10000000 -c 1000 -s 60 -e results/c3.csv http://159.203.132.129:80/components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 159.203.132.129 (be patient)
+Finished 213895 requests
+
+
+Server Software:        nginx/1.6.2
+Server Hostname:        159.203.132.129
+Server Port:            80
+
+Document Path:          /components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+Document Length:        2 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   240.002 seconds
+Complete requests:      213895
+Failed requests:        0
+Total transferred:      88552530 bytes
+Total body sent:        57161804
+HTML transferred:       427790 bytes
+Requests per second:    891.22 [#/sec] (mean)
+Time per request:       1122.057 [ms] (mean)
+Time per request:       1.122 [ms] (mean, across all concurrent requests)
+Transfer rate:          360.32 [Kbytes/sec] received
+                        232.59 kb/s sent
+                        592.91 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1  25.8      0     999
+Processing:     3 1065 4062.4    157  120268
+Waiting:        0 1065 4062.3    157  120268
+Total:          3 1066 4062.6    157  120268
+
+Percentage of the requests served within a certain time (ms)
+  50%    157
+  66%    365
+  75%    554
+  80%    767
+  90%   1832
+  95%   3842
+  98%   8464
+  99%  15934
+ 100%  120268 (longest request)
+

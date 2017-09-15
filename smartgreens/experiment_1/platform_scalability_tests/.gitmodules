@@ -1,0 +1,3 @@
+[submodule "scalability_explorer"]
+	path = scalability_explorer
+	url = git@github.com:arthurmde/scalability_explorer.git

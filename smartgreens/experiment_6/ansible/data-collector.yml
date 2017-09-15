@@ -1,0 +1,28 @@
+---
+#- name: install basic setup
+#  hosts: data-collector
+#  user: root
+#  become: yes
+#  roles:
+#    - common
+#
+#- name: install docker
+#  hosts: data-collector
+#  user: root
+#  become: yes
+#  roles:
+#    - docker
+#
+#- name: install postgres
+#  hosts: data-collector
+#  user: root
+#  become: yes
+#  roles:
+#    - postgres
+
+- name: setup data-collector
+  hosts: data-collector
+  user: root
+  become: yes
+  roles:
+    - data-collector

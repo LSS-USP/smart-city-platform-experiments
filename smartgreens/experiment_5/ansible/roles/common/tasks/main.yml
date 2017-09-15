@@ -1,0 +1,42 @@
+---
+- name: add debian backport repository
+  apt_repository:
+    repo: 'deb http://http.debian.net/debian wheezy-backports main'
+    state: present
+
+- name: install ca-certificates package
+  apt:
+    name: ca-certificates
+    update_cache: yes
+    state: present
+
+- name: install apt-transport-https package
+  apt:
+    name: apt-transport-https
+    update_cache: yes
+    state: present
+
+- name: Install vim
+  package: name=vim state=present
+
+- name: Install git
+  package: name=git state=present
+
+- name: Install collectl
+  apt: name=collectl update_cache=yes state=latest cache_valid_time=3600
+  register: installcollectl
+
+  #- name: create nf_conntrack file
+  #  shell: 'sysctl -w net.netfilter.nf_conntrack_max=200000'
+  #
+  #- name: tunning nf_conntrack
+  #  sysctl:
+  #    name: net.netfilter.nf_conntrack_count
+  #    value: 200000
+  #    state: present
+  #
+  #- name: tunning nf_conntrack hashsize
+  #  shell: 'echo 50000 > /sys/module/nf_conntrack/parameters/hashsize'
+  #
+  #- name: apply tunning
+  #  shell: 'sysctl -p'

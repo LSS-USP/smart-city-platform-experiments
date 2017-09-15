@@ -1,0 +1,57 @@
+---
+
+- name: create redis
+  docker_container:
+    name: redis
+    image: redis
+    state: started
+    restart: yes
+
+- name: create sidekiq service
+  docker_container:
+    name: data-collector-sidekiq
+    image: "{{ docker_image }}"
+    state: started
+    recreate: yes
+    command: bundle exec sidekiq
+    links:
+    - 'postgres'
+    - 'redis'
+    volumes:
+    - /data-collector/
+    env:
+      RAILS_ENV: "{{ rails_env }}"
+      POSTGRES_HOST: "{{ postgres_host }}"
+      POSTGRES_PORT: "{{postgres_port}}"
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      SECRET_KEY_BASE: "{{ secret_key_base }}"
+      RABBITMQ_HOST: "{{ rabbitmq }}"
+
+- name: create data-collector API service
+  docker_container:
+    name: data-collector
+    image: "{{ docker_image }}"
+    state: started
+    recreate: yes
+    links:
+    - 'postgres'
+    - 'redis'
+    volumes:
+    - /data-collector/
+    ports:
+    - "3000:3000"
+    env:
+      RAILS_ENV: "{{ rails_env }}"
+      POSTGRES_HOST: "{{ postgres_host }}"
+      POSTGRES_PORT: "{{postgres_port}}"
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      SECRET_KEY_BASE: "{{ secret_key_base }}"
+      RABBITMQ_HOST: "{{ rabbitmq }}"
+
+  #- name: create database
+  #  command: docker exec data-collector rake db:create
+  #
+  #- name: migrate database
+  #  command: docker exec data-collector rake db:migrate

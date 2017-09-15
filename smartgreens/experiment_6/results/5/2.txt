@@ -1,0 +1,141 @@
+ab -r -p files/jsons/temperature.json -T application/json -t 240 -n 10000000 -c 600 -s 60 -e results/c2.csv http://159.203.132.129:80/components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 159.203.132.129 (be patient)
+Finished 89215 requests
+
+
+Server Software:        nginx/1.6.2
+Server Hostname:        159.203.132.129
+Server Port:            80
+
+Document Path:          /components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+Document Length:        2 bytes
+
+Concurrency Level:      600
+Time taken for tests:   240.002 seconds
+Complete requests:      89215
+Failed requests:        0
+Total transferred:      36935010 bytes
+Total body sent:        23890524
+HTML transferred:       178430 bytes
+Requests per second:    371.73 [#/sec] (mean)
+Time per request:       1614.091 [ms] (mean)
+Time per request:       2.690 [ms] (mean, across all concurrent requests)
+Transfer rate:          150.29 [Kbytes/sec] received
+                        97.21 kb/s sent
+                        247.50 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    0   1.1      0      22
+Processing:     3 1584 3961.1    599   92680
+Waiting:        3 1584 3961.1    599   92680
+Total:          3 1584 3961.1    599   92681
+
+Percentage of the requests served within a certain time (ms)
+  50%    599
+  66%    883
+  75%   1422
+  80%   1646
+  90%   3492
+  95%   7027
+  98%   9732
+  99%  15826
+ 100%  92681 (longest request)
+===============================================================
+
+ab -r -p files/jsons/temperature.json -T application/json -t 240 -n 10000000 -c 1000 -s 60 -e results/c2.csv http://159.203.132.129:80/components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 159.203.132.129 (be patient)
+
+
+Finished 94448 requests
+
+
+Server Software:        nginx/1.6.2
+Server Hostname:        159.203.132.129
+Server Port:            80
+
+Document Path:          /components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+Document Length:        2 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   240.010 seconds
+Complete requests:      94448
+Failed requests:        13
+   (Connect: 0, Receive: 0, Length: 13, Exceptions: 0)
+Non-2xx responses:      13
+Total transferred:      39100334 bytes
+Total body sent:        25388902
+HTML transferred:       191136 bytes
+Requests per second:    393.52 [#/sec] (mean)
+Time per request:       2541.191 [ms] (mean)
+Time per request:       2.541 [ms] (mean, across all concurrent requests)
+Transfer rate:          159.09 [Kbytes/sec] received
+                        103.30 kb/s sent
+                        262.40 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    1  18.6      0    1000
+Processing:     3 2414 5910.0    683   91895
+Waiting:        3 2414 5910.0    683   91895
+Total:          3 2415 5910.0    684   91895
+
+========================================================
+
+ab -r -p files/jsons/temperature.json -T application/json -t 240 -n 10000000 -c 1000 -s 60 -e results/c3.csv http://159.203.132.129:80/components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+This is ApacheBench, Version 2.3 <$Revision: 1604373 $>
+Copyright 1996 Adam Twiss, Zeus Technology Ltd, http://www.zeustech.net/
+Licensed to The Apache Software Foundation, http://www.apache.org/
+
+Benchmarking 159.203.132.129 (be patient)
+Finished 101672 requests
+
+
+Server Software:        nginx/1.6.2
+Server Hostname:        159.203.132.129
+Server Port:            80
+
+Document Path:          /components/aa1f63f4-5d7b-4043-912e-d9c936fb31a8/data
+Document Length:        2 bytes
+
+Concurrency Level:      1000
+Time taken for tests:   240.001 seconds
+Complete requests:      101672
+Failed requests:        5
+   (Connect: 0, Receive: 0, Length: 5, Exceptions: 0)
+Non-2xx responses:      5
+Total transferred:      42091753 bytes
+Total body sent:        27310486
+HTML transferred:       204194 bytes
+Requests per second:    423.63 [#/sec] (mean)
+Time per request:       2360.543 [ms] (mean)
+Time per request:       2.361 [ms] (mean, across all concurrent requests)
+Transfer rate:          171.27 [Kbytes/sec] received
+                        111.13 kb/s sent
+                        282.40 kb/s total
+
+Connection Times (ms)
+              min  mean[+/-sd] median   max
+Connect:        0    2  37.8      0    1001
+Processing:     3 2260 5229.1    476   75040
+Waiting:        3 2260 5229.1    476   75040
+Total:          3 2262 5229.8    477   75040
+
+Percentage of the requests served within a certain time (ms)
+  50%    477
+  66%   1156
+  75%   1569
+  80%   2073
+  90%   4963
+  95%   9847
+  98%  16956
+  99%  31079
+ 100%  75040 (longest request)

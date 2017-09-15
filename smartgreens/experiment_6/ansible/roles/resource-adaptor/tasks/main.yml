@@ -1,0 +1,31 @@
+---
+
+- name: create resource-adaptor service
+  docker_container:
+    name: resource-adaptor
+    image: "{{ docker_image }}"
+    state: started
+    links:
+    - 'postgres'
+    volumes:
+      - /resource-adaptor/
+    ports:
+    - "3000:3000"
+    command: bundle exec puma -p 3000 -C config/puma.rb -e production
+    env:
+      RAILS_ENV: "{{ rails_env }}"
+      RAILS_MAX_THREADS: 200
+      POSTGRES_HOST: "{{ postgres_host }}"
+      POSTGRES_PORT: "{{postgres_port}}"
+      POSTGRES_USER: "{{ postgres_user }}"
+      POSTGRES_PASSWORD: "{{ postgres_password }}"
+      SECRET_KEY_BASE: "{{ secret_key_base }}"
+      RABBITMQ_HOST: "{{ rabbitmq }}"
+      CATALOGUER_HOST: "{{ resource_cataloguer }}:{{ resource_cataloguer_port }}"
+      ADAPTOR_HOST: "{{ resource_adaptor_nginx }}:{{ resource_adaptor_nginx_port }}"
+
+- name: create database
+  command: docker exec resource-adaptor rake db:create
+
+- name: migrate database
+  command: docker exec resource-adaptor rake db:migrate

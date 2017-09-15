@@ -1,0 +1,33 @@
+---
+- name: install apache2-utils
+  package: name=apache2-utils state=present
+
+- name: install python-dev
+  package: name=python-dev state=present
+
+- name: install python-setuptools
+  package: name=python-setuptools state=present
+
+- name: install python-webunit
+  package: name=python-webunit state=present
+
+- name: install python-docutils
+  package: name=python-docutils state=present
+
+- name: install gnuplot
+  package: name=gnuplot state=present
+
+- name: install tcpwatch-httpproxy
+  apt:
+    name: tcpwatch-httpproxy
+    state: present
+    install_recommends: no
+
+- name: install funkload
+  package: name=funkload state=present
+
+- name: clone git repository
+  git:
+    repo: https://gitlab.com/smart-city-software-platform/benchmark.git
+    dest: /srv/benchmark
+    version: experiment2
