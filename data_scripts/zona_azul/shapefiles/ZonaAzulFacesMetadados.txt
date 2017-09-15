@@ -1,0 +1,35 @@
+METADADOS
+---------
+
+Título:
+Zona Azul - Geral
+
+Periodicidade:
+A cada alteração das linhas de Zona Azul
+
+Versão:
+1.00
+
+Tema:
+TRANSITO
+
+Descrição:
+Linhas indicativas de vias de Zona Azul.
+
+Notas:
+Estão georreferenciadas, informando número de vagas, horários e tempo de permanência.
+
+Tipo de Representação:
+LINHA
+
+Escala:
+1:1.000
+
+Base Cartográfica:
+MDC
+
+Sistema de Referência:
+WGS_84 (EPSG: 4326)
+
+Data Atualização:
+06/09/2017

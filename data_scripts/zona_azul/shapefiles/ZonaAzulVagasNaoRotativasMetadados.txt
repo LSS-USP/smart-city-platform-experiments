@@ -1,0 +1,35 @@
+METADADOS
+---------
+
+Título:
+Zona Azul - Vagas Não Rotativas
+
+Periodicidade:
+A cada alteração de vagas
+
+Versão:
+1.00
+
+Tema:
+TRANSITO
+
+Descrição:
+Vagas especiais não rotativas para Defis, Idoso, Moto, Motofrete e Bicicleta.
+
+Notas:
+Vagas DeFis e Idoso são regulamentadas pelo CONTRAN (Resoluções 303 e 304).
+
+Tipo de Representação:
+PONTO
+
+Escala:
+1:1000
+
+Base Cartográfica:
+MDC
+
+Sistema de Referência:
+WGS_84 (EPSG: 4326)
+
+Data Atualização:
+25/08/2017

@@ -1,0 +1,35 @@
+METADADOS
+---------
+
+Título:
+Zona Azul - Vagas Rotativas
+
+Periodicidade:
+A cada alteração de vagas
+
+Versão:
+1.00
+
+Tema:
+TRANSITO
+
+Descrição:
+Vagas especiais rotativas para DeFis, Idoso, Caminhão e Fretado.
+
+Notas:
+Vagas DeFis e Idoso são regulamentadas pelo CONTRAN (Resoluções 303 e 304).
+
+Tipo de Representação:
+PONTO
+
+Escala:
+1:1.000
+
+Base Cartográfica:
+MDC
+
+Sistema de Referência:
+WGS_84 (EPSG: 4326)
+
+Data Atualização:
+11/09/2017

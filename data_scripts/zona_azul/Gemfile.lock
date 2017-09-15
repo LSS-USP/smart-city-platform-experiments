@@ -1,0 +1,23 @@
+GEM
+  remote: https://rubygems.org/
+  specs:
+    dbf (3.1.0)
+    geocoder (1.4.4)
+    mini_portile2 (2.2.0)
+    nokogiri (1.8.0)
+      mini_portile2 (~> 2.2.0)
+    rgeo (0.6.0)
+    rgeo-shapefile (0.4.2)
+      dbf (~> 3.0)
+      rgeo (~> 0.3)
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  geocoder
+  nokogiri
+  rgeo-shapefile
+
+BUNDLED WITH
+   1.14.6
