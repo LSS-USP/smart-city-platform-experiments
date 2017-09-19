@@ -1,17 +1,19 @@
 # Parse for Private Parking from Google Places API
 
-This repository contains the script to parse Google Places API to create city
-resources in InterSCity platform from private parking data of São Paulo city. 
+This repository contains the script to parse the output of OpenStreetMaps API
+from the seaerch of parking spaces in São Paulo city. The output of this script
+will be used to define city resources in InterSCity platform. 
 
-The *parser.rb* will access [Google Places API](https://developers.google.com/places/)
+The *parser.rb* will access [the Open Street Maps XAPI](http://wiki.openstreetmap.org/wiki/Xapi)
 to get all available parkings and generates an easy-to-read XML file in the
 folder [output](output) with the location of each parking spots.
 
 ## Setup
 
-* To request an API key, point your browser to [code.google.com/apis/console](https://code.google.com/apis/console)
-and follow the instructions there.
-* Insert you API key in the [config.yml file](config.yml)
+* Run the following request with curl to get all data related to parking spaces on São Paulo city:
+```sh
+curl --location --globoff "http://overpass.osm.rambler.ru/cgi/xapi_meta?*[amenity=parking][bbox=-46.867260,-23.780220,-46.364635,-23.382500]" -o data.osm
+```
 * Install Ruby 2.4.0
 * Install bundler:
 ```sh
