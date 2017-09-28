@@ -1,0 +1,12 @@
+imports:
+- path: cluster.jinja
+
+resources:
+- name: my-cluster
+  type: cluster.jinja
+  properties:
+    zone: us-central1-f
+    username: admin
+    password: password12345
+    machineType: n1-standard-1
+    numNodes: 2

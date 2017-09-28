@@ -1,0 +1,33 @@
+#!/bin/sh
+
+FILE_DIR=`perl -e 'use Cwd "abs_path";print abs_path(shift)' $0`
+BASE_DIR=`dirname $FILE_DIR`/..
+
+verify () {
+  if [ $? != 0 ]; then
+    echo "$1"
+    exit 2
+  fi
+}
+
+if [ "$1" = "create" ]; then
+  echo "Creating the cluster"
+
+  gcloud deployment-manager deployments create cluster --config cluster/cluster.yaml 
+  gcloud container clusters get-credentials interscity-cluster
+
+  echo "Creating postgres service"
+  kubectl create -f kubernetes/objects/postgres.yaml 
+  
+  echo "Preparing database"
+  kubectl create -f kubernetes/objects/kong_migration_postgres.yaml 
+  kubectl delete -f kubernetes/objects/kong_migration_postgres.yaml
+  
+  echo "Deploying Kong"
+  kubectl create -f kubernetes/objects/kong_postgres.yaml
+fi
+
+if [ "$1" = "delete" ]; then
+  echo "Deleting the cluster"
+  gcloud deployment-manager deployments create delete --config cluster/cluster.yaml 
+fi
