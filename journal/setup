@@ -32,6 +32,15 @@ create_pods () {
   
   echo "Deploying Kong"
   kubectl create -f kubernetes/objects/kong_postgres.yaml
+  
+  echo "Deploying RabbitMQ"
+  kubectl create secret generic rabbitmq-config --from-literal=erlang-cookie=c-is-for-cookie-thats-good-enough-for-me
+  kubectl create -f kubernetes/objects/rabbitmq.yaml
+ 
+  # Sometimes, Kong crashes because of migrations
+  echo "Preparing Kong database again"
+  kubectl create -f kubernetes/objects/kong_migration_postgres.yaml 
+  kubectl delete -f kubernetes/objects/kong_migration_postgres.yaml
 }
 
 delete_cluster() {
@@ -46,6 +55,9 @@ delete_pods() {
   
   echo "Deleting Kong"
   kubectl delete -f kubernetes/objects/kong_postgres.yaml
+  
+  echo "Deleting RabbitMQ"
+  kubectl delete -f kubernetes/objects/rabbitmq.yaml
 }
 
 if [ "$1" = "create-all" ]; then

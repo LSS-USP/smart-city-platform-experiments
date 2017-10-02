@@ -80,6 +80,7 @@ spec:
       containers:
       - name: kong
         image: kong
+        #command:  ["/bin/bash","-c","kong migrations up && kong start"]
         env:
           - name: KONG_PG_PASSWORD
             value: kong
