@@ -48,3 +48,9 @@ sudo apt-get install kubectl
 ```sh
 gcloud config set compute/zone us-central1-f
 ```
+
+# References
+
+* RabbitMQ
+  * https://wesmorgan.svbtle.com/rabbitmq-cluster-on-kubernetes-with-statefulsets
+
