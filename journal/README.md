@@ -49,6 +49,11 @@ sudo apt-get install kubectl
 gcloud config set compute/zone us-central1-f
 ```
 
+# TODO
+
+* [ ] Google is blocking the creation of Load Balancer: `Error 403: Quota 'IN_USE_ADDRESSES' exceeded. Limit: 8.0, quotaExceeded`
+
+
 # References
 
 * RabbitMQ
