@@ -27,7 +27,19 @@ create_pods () {
   kubectl create -f kubernetes/objects/postgres.yaml 
   
   echo "Preparing database"
-  kubectl create -f kubernetes/objects/kong_migration_postgres.yaml 
+  kubectl create -f kubernetes/objects/kong_migration_postgres.yaml
+
+  echo "Running job for database migration"
+  running=`kubectl get pods | grep kong-migration | wc -l`
+  while [ $running -eq 1 ]
+  do
+    sleep 3s
+    running=`kubectl get pods | grep kong-migration | wc -l`
+    echo -n '.'
+  done
+
+  echo
+  echo "Deleting job of database migration"
   kubectl delete -f kubernetes/objects/kong_migration_postgres.yaml
   
   echo "Deploying Kong"
@@ -36,11 +48,6 @@ create_pods () {
   echo "Deploying RabbitMQ"
   kubectl create secret generic rabbitmq-config --from-literal=erlang-cookie=c-is-for-cookie-thats-good-enough-for-me
   kubectl create -f kubernetes/objects/rabbitmq.yaml
- 
-  # Sometimes, Kong crashes because of migrations
-  echo "Preparing Kong database again"
-  kubectl create -f kubernetes/objects/kong_migration_postgres.yaml 
-  kubectl delete -f kubernetes/objects/kong_migration_postgres.yaml
 }
 
 delete_cluster() {
