@@ -52,6 +52,9 @@ create_pods () {
   echo "Deploying MongoDB"
   kubectl apply -f kubernetes/objects/googlecloud_ssd.yaml
   kubectl apply -f kubernetes/objects/mongo-statefulset.yaml
+
+  echo "Deploying Postgres"
+  kubectl apply -f kubernetes/objects/postgres-statefulset.yaml
 }
 
 delete_cluster() {
@@ -74,6 +77,11 @@ delete_pods() {
   kubectl delete statefulset mongo
   kubectl delete svc mongo
   kubectl delete pvc -l role=mongo
+
+  echo "Deleting Postgres"
+  kubectl delete statefulset postgres-interscity
+  kubectl delete svc postgres-interscity
+  kubectl delete pvc -l role=postgres-interscity
 }
 
 scale_mongo() {
