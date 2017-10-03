@@ -22,6 +22,13 @@ create_cluster () {
   gcloud container clusters get-credentials $CLUSTER 
 }
 
+create_disks (){
+  echo "Creating disks for mongo-db"
+  gcloud compute disks create mongodb-disk1
+  gcloud compute disks create mongodb-disk2
+  gcloud compute disks create mongodb-disk3
+}
+
 create_pods () {
   echo "Creating postgres service"
   kubectl create -f kubernetes/objects/postgres.yaml 
@@ -48,6 +55,9 @@ create_pods () {
   echo "Deploying RabbitMQ"
   kubectl create secret generic rabbitmq-config --from-literal=erlang-cookie=c-is-for-cookie-thats-good-enough-for-me
   kubectl create -f kubernetes/objects/rabbitmq.yaml
+
+  echo "Deploying MongoDB"
+  kubectl create -f kubernetes/objects/mongo_db.yaml
 }
 
 delete_cluster() {
@@ -56,19 +66,31 @@ delete_cluster() {
   echo "Cluster deleted!"
 }
 
+delete_disks (){
+  echo "Deleting disks for mongo-db"
+  gcloud compute disks delete mongodb-disk1
+  gcloud compute disks delete mongodb-disk2
+  gcloud compute disks delete mongodb-disk3
+  echo "All disks deleted!"
+}
+
 delete_pods() {
   echo "Deleting postgres service"
   kubectl delete -f kubernetes/objects/postgres.yaml 
-  
+
   echo "Deleting Kong"
   kubectl delete -f kubernetes/objects/kong_postgres.yaml
-  
+
   echo "Deleting RabbitMQ"
   kubectl delete -f kubernetes/objects/rabbitmq.yaml
+
+  echo "Deleting MongoDB"
+  kubectl delete -f kubernetes/objects/mongo_db.yaml
 }
 
 if [ "$1" = "create-all" ]; then
   create_cluster
+  create_disks
   create_pods
 fi
 
@@ -78,9 +100,19 @@ fi
 
 if [ "$1" = "delete-all" ]; then
  delete_pods
+ delete_disks
  delete_cluster
 fi
 
 if [ "$1" = "delete-pods" ]; then
- delete_pods
+  delete_pods
+fi
+
+
+if [ "$1" = "create-temp" ]; then
+ kubectl create -f kubernetes/objects/mongo_db.yaml
+fi
+
+if [ "$1" = "delete-temp" ]; then
+ kubectl delete -f kubernetes/objects/mongo_db.yaml
 fi
