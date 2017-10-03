@@ -59,8 +59,6 @@ gcloud config set compute/zone us-central1-f
 * RabbitMQ
   * https://wesmorgan.svbtle.com/rabbitmq-cluster-on-kubernetes-with-statefulsets
 * MongoDB
-  * https://github.com/cvallance/mongo-k8s-sidecar
-  * https://www.mongodb.com/blog/post/running-mongodb-as-a-microservice-with-docker-and-kubernetes
-  * https://github.com/thesandlord/mongo-k8s-sidecar
   * http://blog.kubernetes.io/2017/01/running-mongodb-on-kubernetes-with-statefulsets.html
+  * https://www.mongodb.com/blog/post/running-mongodb-as-a-microservice-with-docker-and-kubernetes
 
