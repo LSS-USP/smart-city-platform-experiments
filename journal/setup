@@ -22,13 +22,6 @@ create_cluster () {
   gcloud container clusters get-credentials $CLUSTER 
 }
 
-create_disks (){
-  echo "Creating disks for mongo-db"
-  gcloud compute disks create mongodb-disk1
-  gcloud compute disks create mongodb-disk2
-  gcloud compute disks create mongodb-disk3
-}
-
 create_pods () {
   echo "Creating postgres service"
   kubectl create -f kubernetes/objects/postgres.yaml 
@@ -57,21 +50,14 @@ create_pods () {
   kubectl create -f kubernetes/objects/rabbitmq.yaml
 
   echo "Deploying MongoDB"
-  kubectl create -f kubernetes/objects/mongo_db.yaml
+  kubectl apply -f kubernetes/objects/googlecloud_ssd.yaml
+  kubectl apply -f kubernetes/objects/mongo-statefulset.yaml
 }
 
 delete_cluster() {
   echo "Deleting the cluster"
   gcloud container clusters delete $CLUSTER --zone $ZONE
   echo "Cluster deleted!"
-}
-
-delete_disks (){
-  echo "Deleting disks for mongo-db"
-  gcloud compute disks delete mongodb-disk1
-  gcloud compute disks delete mongodb-disk2
-  gcloud compute disks delete mongodb-disk3
-  echo "All disks deleted!"
 }
 
 delete_pods() {
@@ -85,12 +71,17 @@ delete_pods() {
   kubectl delete -f kubernetes/objects/rabbitmq.yaml
 
   echo "Deleting MongoDB"
-  kubectl delete -f kubernetes/objects/mongo_db.yaml
+  kubectl delete statefulset mongo
+  kubectl delete svc mongo
+  kubectl delete pvc -l role=mongo
+}
+
+scale_mongo() {
+  kubectl scale --replicas=$1 statefulset mongo
 }
 
 if [ "$1" = "create-all" ]; then
   create_cluster
-  create_disks
   create_pods
 fi
 
@@ -100,19 +91,9 @@ fi
 
 if [ "$1" = "delete-all" ]; then
  delete_pods
- delete_disks
  delete_cluster
 fi
 
 if [ "$1" = "delete-pods" ]; then
   delete_pods
-fi
-
-
-if [ "$1" = "create-temp" ]; then
- kubectl create -f kubernetes/objects/mongo_db.yaml
-fi
-
-if [ "$1" = "delete-temp" ]; then
- kubectl delete -f kubernetes/objects/mongo_db.yaml
 fi
