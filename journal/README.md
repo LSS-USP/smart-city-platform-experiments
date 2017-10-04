@@ -53,6 +53,11 @@ gcloud config set compute/zone us-central1-f
 
 * [ ] Google is blocking the creation of Load Balancer: `Error 403: Quota 'IN_USE_ADDRESSES' exceeded. Limit: 8.0, quotaExceeded`
 * [ ] For each stolon-sentinel, get cluster data
+* [ ] Separate node-pools on google to run databases. In a containner spec you may use:
+```yaml
+nodeSelector:
+  cloud.google.com/gke-nodepool: db-pool
+```
 
 
 # References
@@ -66,3 +71,6 @@ gcloud config set compute/zone us-central1-f
   * https://github.com/sorintlab/stolon/blob/master/examples/kubernetes/README.md
 * etcd
   * https://github.com/coreos/etcd/tree/master/hack/kubernetes-deploy
+* Rails APP
+  * https://engineering.adwerx.com/rails-on-docker-compose-7e2cf235fa0e
+  * https://engineering.adwerx.com/rails-on-kubernetes-8cd4940eacbe
