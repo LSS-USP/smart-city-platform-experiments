@@ -53,8 +53,15 @@ create_pods () {
   kubectl apply -f kubernetes/objects/googlecloud_ssd.yaml
   kubectl apply -f kubernetes/objects/mongo-statefulset.yaml
 
-  echo "Deploying Postgres"
-  kubectl apply -f kubernetes/objects/postgres-statefulset.yaml
+  echo "Deploying etcd"
+  kubectl create -f kubernetes/objects/etcd.yaml
+  sleep 3s
+
+  echo "Deploying Postgres with Stolon"
+  kubectl create -f kubernetes/objects/postgres-stolon-interscity.yaml
+  sleep 2s
+  pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep stolon-sentinel | head -1`
+  kubectl exec $pod_name stolonctl -it -- --cluster-name=cluster-xp --store-backend=etcd --store-endpoints=http://etcd-client:2379 init
 }
 
 delete_cluster() {
@@ -78,14 +85,20 @@ delete_pods() {
   kubectl delete svc mongo
   kubectl delete pvc -l role=mongo
 
+  echo "Deploying etcd"
+  kubectl delete -f kubernetes/objects/etcd.yaml
+
   echo "Deleting Postgres"
-  kubectl delete statefulset postgres-interscity
-  kubectl delete svc postgres-interscity
-  kubectl delete pvc -l role=postgres-interscity
+  kubectl delete -f kubernetes/objects/postgres-stolon-interscity.yaml
 }
 
 scale_mongo() {
   kubectl scale --replicas=$1 statefulset mongo
+}
+
+scale_postgres() {
+  kubectl scale --replicas=3 rc stolon-sentinel
+  kubectl scale --replicas=3 rc stolon-proxy
 }
 
 if [ "$1" = "create-all" ]; then
