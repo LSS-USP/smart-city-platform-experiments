@@ -5,7 +5,7 @@ BASE_DIR=`dirname $FILE_DIR`/..
 CLUSTER=cluster-xp
 ZONE=us-central1-f
 MACHINE_TYPE=n1-standard-1
-NUM_NODES=4
+NUM_NODES=6
 
 verify () {
   if [ $? != 0 ]; then
