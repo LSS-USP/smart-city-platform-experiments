@@ -62,5 +62,6 @@ gcloud config set compute/zone us-central1-f
   * http://blog.kubernetes.io/2017/01/running-mongodb-on-kubernetes-with-statefulsets.html
   * https://www.mongodb.com/blog/post/running-mongodb-as-a-microservice-with-docker-and-kubernetes
 * Postgres
-  * https://github.com/CrunchyData/crunchy-containers
-  * https://github.com/crunchydata/postgres-operator
+  * https://github.com/sorintlab/stolon/blob/master/examples/kubernetes/README.md
+* etcd
+  * https://github.com/coreos/etcd/tree/master/hack/kubernetes-deploy
