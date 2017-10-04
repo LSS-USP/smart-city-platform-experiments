@@ -1,0 +1,49 @@
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: resource-cataloguer
+  labels:
+    name: resource-cataloguer
+spec:
+  replicas: 2
+  template:
+    metadata:
+      labels:
+        name: resource-cataloguer
+    spec:
+      nodeSelector:
+        cloud.google.com/gke-nodepool: default-pool
+      containers:
+        - name: resource-cataloguer
+          image: arthurmde/resource-cataloguer:0.2-0.1-exp2
+          ports:
+            - containerPort: 3000
+          livenessProbe:
+            httpGet:
+              path: /_health
+              port: 3000
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+          readinessProbe:
+            httpGet:
+              path: /_health
+              port: 3000
+            initialDelaySeconds: 30
+            timeoutSeconds: 1
+          env:
+            - name: POSTGRES_USER
+              value: stolon
+            - name: POSTGRES_PASSWORD
+              value: interscity
+            - name: POSTGRES_HOST
+              value: stolon-proxy-service
+            - name: POSTGRES_PORT
+              value: '5432'
+            - name: RABBITMQ_HOST
+              value: 'rabbitmq'
+            - name: KONG_URI
+              value: 'http://kong-admin:8001'
+            - name: SELF_HOST
+              value: '$HOSTNAME:3000'
+            - name: REGISTER_METHOD
+              value: 'target'
