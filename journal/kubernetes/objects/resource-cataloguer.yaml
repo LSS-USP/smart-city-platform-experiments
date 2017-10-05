@@ -15,7 +15,7 @@ spec:
         cloud.google.com/gke-nodepool: default-pool
       containers:
         - name: resource-cataloguer
-          image: arthurmde/resource-cataloguer:0.2-0.1-exp2
+          image: arthurmde/resource-cataloguer:0.2-0.2-exp2
           ports:
             - containerPort: 3000
           livenessProbe:
