@@ -59,9 +59,9 @@ create_pods () {
 
   echo "Deploying Postgres with Stolon"
   kubectl create -f kubernetes/objects/postgres-stolon-interscity.yaml
-  sleep 5s
+  sleep 10s
   pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep stolon-sentinel | head -1`
-  kubectl exec $pod_name stolonctl -it -- --cluster-name=cluster-xp --store-backend=etcd --store-endpoints=http://etcd-client:2379 init
+  printf "yes\n" | kubectl exec $pod_name stolonctl -it -- --cluster-name=cluster-xp --store-backend=etcd --store-endpoints=http://etcd-client:2379 init
 
   echo "Preparing Resource Catalog database"
   kubectl create -f kubernetes/objects/resource-cataloguer-migration.yaml
@@ -85,7 +85,7 @@ create_pods () {
 
 delete_cluster() {
   echo "Deleting the cluster"
-  gcloud container clusters delete $CLUSTER --zone $ZONE
+  yes | gcloud container clusters delete $CLUSTER --zone $ZONE
   echo "Cluster deleted!"
 }
 
@@ -94,6 +94,7 @@ delete_pods() {
   kubectl delete -f kubernetes/objects/postgres.yaml 
 
   echo "Deleting Kong"
+  kubectl delete -f kubernetes/objects/kong_migration_postgres.yaml
   kubectl delete -f kubernetes/objects/kong_postgres.yaml
 
   echo "Deleting RabbitMQ"
@@ -111,6 +112,7 @@ delete_pods() {
   kubectl delete -f kubernetes/objects/postgres-stolon-interscity.yaml
 
   echo "Deleting Resource Cataloguer"
+  kubectl delete -f kubernetes/objects/resource-cataloguer-migration.yaml
   kubectl delete -f kubernetes/objects/resource-cataloguer.yaml
 }
 
