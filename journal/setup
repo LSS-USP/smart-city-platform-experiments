@@ -63,6 +63,10 @@ create_pods () {
   pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep stolon-sentinel | head -1`
   printf "yes\n" | kubectl exec $pod_name stolonctl -it -- --cluster-name=cluster-xp --store-backend=etcd --store-endpoints=http://etcd-client:2379 init
 
+  create_interscity_services
+}
+
+create_interscity_services() {
   echo "Preparing Resource Catalog database"
   kubectl create -f kubernetes/objects/resource-cataloguer-migration.yaml
 
@@ -81,6 +85,27 @@ create_pods () {
 
   echo "Deploying Resource Cataloguer"
   kubectl create -f kubernetes/objects/resource-cataloguer.yaml
+
+  #=====================================================================
+
+  echo "Preparing Resource Adaptor database"
+  kubectl create -f kubernetes/objects/resource-adaptor-migration.yaml
+
+  echo "Running job for database migration"
+  running=`kubectl get pods | grep resource-adaptor-migration | wc -l`
+  while [ $running -eq 1 ]
+  do
+    sleep 3s
+    running=`kubectl get pods | grep resource-adaptor-migration | wc -l`
+    echo -n '.'
+  done
+
+  echo
+  echo "Deleting job of resource-adaptor database migration"
+  kubectl delete -f kubernetes/objects/resource-adaptor-migration.yaml
+
+  echo "Deploying Resource Cataloguer"
+  kubectl create -f kubernetes/objects/resource-adaptor.yaml
 }
 
 delete_cluster() {
