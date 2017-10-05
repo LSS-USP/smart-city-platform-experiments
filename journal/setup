@@ -87,6 +87,12 @@ delete_cluster() {
   echo "Deleting the cluster"
   yes | gcloud container clusters delete $CLUSTER --zone $ZONE
   echo "Cluster deleted!"
+  echo "Deleting disks"
+  names=`gcloud compute disks list | sed -n '1!p' | while read -r instance; do printf $instance | awk '{print $1}'; done`
+  for name in $names; do
+    echo "Disk: $name"
+    yes | gcloud compute disks delete $name
+  done
 }
 
 delete_pods() {
