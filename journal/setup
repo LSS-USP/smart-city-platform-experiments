@@ -5,7 +5,7 @@ BASE_DIR=`dirname $FILE_DIR`/..
 CLUSTER=cluster-xp
 ZONE=us-central1-f
 MACHINE_TYPE=n1-standard-1
-NUM_NODES=6
+NUM_NODES=8
 
 verify () {
   if [ $? != 0 ]; then
@@ -24,10 +24,10 @@ create_cluster () {
 
 create_pods () {
   echo "Creating postgres service"
-  kubectl create -f kubernetes/objects/postgres.yaml 
+  kubectl create -f kubernetes/postgres.yaml
   
   echo "Preparing database"
-  kubectl create -f kubernetes/objects/kong_migration_postgres.yaml
+  kubectl create -f kubernetes/kong_migration_postgres.yaml
 
   echo "Running job for database migration"
   running=`kubectl get pods | grep kong-migration | wc -l`
@@ -40,27 +40,34 @@ create_pods () {
 
   echo
   echo "Deleting job of database migration"
-  kubectl delete -f kubernetes/objects/kong_migration_postgres.yaml
+  kubectl delete -f kubernetes/kong_migration_postgres.yaml
   
   echo "Deploying Kong"
-  kubectl create -f kubernetes/objects/kong_postgres.yaml
+  kubectl create -f kubernetes/kong_postgres.yaml
   
   echo "Deploying RabbitMQ"
   kubectl create secret generic rabbitmq-config --from-literal=erlang-cookie=c-is-for-cookie-thats-good-enough-for-me
-  kubectl create -f kubernetes/objects/rabbitmq.yaml
+  kubectl create -f kubernetes/rabbitmq.yaml
 
   echo "Deploying MongoDB"
-  kubectl apply -f kubernetes/objects/googlecloud_ssd.yaml
-  kubectl apply -f kubernetes/objects/mongo-statefulset.yaml
+  kubectl apply -f kubernetes/googlecloud_ssd.yaml
+  kubectl apply -f kubernetes/mongo-statefulset.yaml
 
   echo "Deploying etcd"
-  kubectl create -f kubernetes/objects/etcd.yaml
+  kubectl create -f kubernetes/etcd.yaml
   sleep 3s
 
   echo "Deploying Postgres with Stolon"
-  kubectl create -f kubernetes/objects/postgres-stolon-interscity.yaml
+  kubectl create -f kubernetes/postgres-stolon-interscity.yaml
   sleep 10s
   pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep stolon-sentinel | head -1`
+  echo "Stolon sentinel POD name: $pod_name"
+  while [ -z "$pod_name" ]
+  do
+    sleep 3
+    pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep stolon-sentinel | head -1`
+    echo "Stolon sentinel POD name: $pod_name"
+  done
   printf "yes\n" | kubectl exec $pod_name stolonctl -it -- --cluster-name=cluster-xp --store-backend=etcd --store-endpoints=http://etcd-client:2379 init
 
   create_interscity_services
@@ -68,7 +75,7 @@ create_pods () {
 
 create_interscity_services() {
   echo "Preparing Resource Catalog database"
-  kubectl create -f kubernetes/objects/resource-cataloguer-migration.yaml
+  kubectl create -f kubernetes/resource-cataloguer-migration.yaml
 
   echo "Running job for database migration"
   running=`kubectl get pods | grep resource-cataloguer-migration | wc -l`
@@ -81,15 +88,15 @@ create_interscity_services() {
 
   echo
   echo "Deleting job of resource-cataloguer database migration"
-  kubectl delete -f kubernetes/objects/resource-cataloguer-migration.yaml
+  kubectl delete -f kubernetes/resource-cataloguer-migration.yaml
 
   echo "Deploying Resource Cataloguer"
-  kubectl create -f kubernetes/objects/resource-cataloguer.yaml
+  kubectl create -f kubernetes/resource-cataloguer.yaml
 
   #=====================================================================
 
   echo "Preparing Resource Adaptor database"
-  kubectl create -f kubernetes/objects/resource-adaptor-migration.yaml
+  kubectl create -f kubernetes/resource-adaptor-migration.yaml
 
   echo "Running job for database migration"
   running=`kubectl get pods | grep resource-adaptor-migration | wc -l`
@@ -102,10 +109,10 @@ create_interscity_services() {
 
   echo
   echo "Deleting job of resource-adaptor database migration"
-  kubectl delete -f kubernetes/objects/resource-adaptor-migration.yaml
+  kubectl delete -f kubernetes/resource-adaptor-migration.yaml
 
   echo "Deploying Resource Cataloguer"
-  kubectl create -f kubernetes/objects/resource-adaptor.yaml
+  kubectl create -f kubernetes/resource-adaptor.yaml
 }
 
 delete_cluster() {
@@ -122,14 +129,14 @@ delete_cluster() {
 
 delete_pods() {
   echo "Deleting postgres service"
-  kubectl delete -f kubernetes/objects/postgres.yaml 
+  kubectl delete -f kubernetes/postgres.yaml
 
   echo "Deleting Kong"
-  kubectl delete -f kubernetes/objects/kong_migration_postgres.yaml
-  kubectl delete -f kubernetes/objects/kong_postgres.yaml
+  kubectl delete -f kubernetes/kong_migration_postgres.yaml
+  kubectl delete -f kubernetes/kong_postgres.yaml
 
   echo "Deleting RabbitMQ"
-  kubectl delete -f kubernetes/objects/rabbitmq.yaml
+  kubectl delete -f kubernetes/rabbitmq.yaml
 
   echo "Deleting MongoDB"
   kubectl delete statefulset mongo
@@ -137,14 +144,14 @@ delete_pods() {
   kubectl delete pvc -l role=mongo
 
   echo "Deploying etcd"
-  kubectl delete -f kubernetes/objects/etcd.yaml
+  kubectl delete -f kubernetes/etcd.yaml
 
   echo "Deleting Postgres"
-  kubectl delete -f kubernetes/objects/postgres-stolon-interscity.yaml
+  kubectl delete -f kubernetes/postgres-stolon-interscity.yaml
 
   echo "Deleting Resource Cataloguer"
-  kubectl delete -f kubernetes/objects/resource-cataloguer-migration.yaml
-  kubectl delete -f kubernetes/objects/resource-cataloguer.yaml
+  kubectl delete -f kubernetes/resource-cataloguer-migration.yaml
+  kubectl delete -f kubernetes/resource-cataloguer.yaml
 }
 
 scale_mongo() {

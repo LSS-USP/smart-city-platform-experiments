@@ -58,6 +58,8 @@ spec:
           env:
             - name: MONGO_SIDECAR_POD_LABELS
               value: "role=mongo,environment=test"
+            - name: AUTH
+              value: "no"
   volumeClaimTemplates:
   - metadata:
       name: mongo-persistent-storage
