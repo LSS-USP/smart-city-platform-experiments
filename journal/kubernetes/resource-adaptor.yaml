@@ -59,6 +59,10 @@ spec:
               value: 'rabbitmq'
             - name: KONG_URI
               value: 'http://kong-admin:8001'
+            - name: CATALOGUER_HOST
+              value: 'kong-proxy:8000/catalog'
+            - name: ADAPTOR_HOST
+              value: 'kong-proxy:8000/adaptor'
             - name: REGISTER_METHOD
               value: 'target'
             - name: MY_POD_IP
