@@ -62,15 +62,17 @@ create_pods () {
   sleep 10s
   pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep stolon-sentinel | head -1`
   echo "Stolon sentinel POD name: $pod_name"
-  while [ -z "$pod_name" ]
+  printf "yes\n" | kubectl exec $pod_name stolonctl -it -- --cluster-name=cluster-xp --store-backend=etcd --store-endpoints=http://etcd-client:2379 init
+  while [ $? != 0 ]
   do
     sleep 3
-    pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep stolon-sentinel | head -1`
-    echo "Stolon sentinel POD name: $pod_name"
+    printf "yes\n" | kubectl exec $pod_name stolonctl -it -- --cluster-name=cluster-xp --store-backend=etcd --store-endpoints=http://etcd-client:2379 init
   done
-  printf "yes\n" | kubectl exec $pod_name stolonctl -it -- --cluster-name=cluster-xp --store-backend=etcd --store-endpoints=http://etcd-client:2379 init
 
   create_interscity_services
+
+  echo "======== Current Status ==========="
+  kubectl get svc,pods
 }
 
 create_interscity_services() {
