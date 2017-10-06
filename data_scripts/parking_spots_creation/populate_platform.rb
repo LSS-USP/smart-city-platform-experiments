@@ -42,7 +42,7 @@ puts "[I] Parsing park.xml file"
 content = XmlSimple.xml_in('park.xml')
 
 
-def create_resource(spot)
+def create_resource(spot, host)
 
 	puts "[I] Check if parking spot #{spot['uuid']} exists"
 
@@ -135,7 +135,7 @@ end
 pool = ThreadPool.new(size: 5)
 
 content["spot"].each do |spot|
-	pool.schedule { create_resource(spot) }
+	pool.schedule { create_resource(spot, host) }
 end
 
 pool.shutdown
