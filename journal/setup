@@ -113,6 +113,11 @@ create_interscity_services() {
 
   echo "Deploying Resource Cataloguer"
   kubectl create -f kubernetes/resource-adaptor.yaml
+
+  #=====================================================================
+
+  echo "Deploying Data Collector"
+  kubectl create -f kubernetes/data-collector.yaml
 }
 
 delete_cluster() {
@@ -152,6 +157,13 @@ delete_pods() {
   echo "Deleting Resource Cataloguer"
   kubectl delete -f kubernetes/resource-cataloguer-migration.yaml
   kubectl delete -f kubernetes/resource-cataloguer.yaml
+
+  echo "Deleting Resource Adaptor"
+  kubectl delete -f kubernetes/resource-adaptor-migration.yaml
+  kubectl delete -f kubernetes/resource-adaptor.yaml
+
+  echo "Deploying Data Collector"
+  kubectl delete -f kubernetes/data-collector.yaml
 }
 
 scale_mongo() {
