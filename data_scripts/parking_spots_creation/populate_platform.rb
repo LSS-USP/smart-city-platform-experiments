@@ -5,7 +5,9 @@ require 'xmlsimple'
 
 puts "[I] Check if parking_monitoring capability exists"
 
-uri_check_capability = URI.parse("http://localhost:8000/catalog/capabilities/parking_monitoring")
+host = ENV['INTERSCITY_HOST'] || 'localhost:8000'
+
+uri_check_capability = URI.parse("http://#{host}/catalog/capabilities/parking_monitoring")
 
 http = Net::HTTP.new(uri_check_capability.host, uri_check_capability.port)
 request = Net::HTTP::Get.new(uri_check_capability.request_uri, 'Content-Type': 'application/json')
@@ -21,7 +23,7 @@ if response.code == "404"
 		capability_type: "sensor"
 	}
 
-	uri_capabilities = URI.parse("http://localhost:8000/catalog/capabilities")
+	uri_capabilities = URI.parse("http://#{host}/catalog/capabilities")
 	http = Net::HTTP.new(uri_capabilities.host, uri_capabilities.port)
 	request = Net::HTTP::Post.new(uri_capabilities.request_uri, 'Content-Type': 'application/json')
 	request.body = capability.to_json
@@ -44,7 +46,7 @@ def create_resource(spot)
 
 	puts "[I] Check if parking spot #{spot['uuid']} exists"
 
-	uri_check_resource = URI.parse("http://localhost:8000/catalog/resources/#{spot['uuid']}")
+	uri_check_resource = URI.parse("http://#{host}/catalog/resources/#{spot['uuid']}")
 	http = Net::HTTP.new(uri_check_resource.host, uri_check_resource.port)
 	request = Net::HTTP::Get.new(uri_check_resource.request_uri, 'Content-Type': 'application/json')
 	response = http.request(request)
@@ -65,7 +67,7 @@ def create_resource(spot)
 			}
 		}
 		
-		uri_check_resource = URI.parse("http://localhost:8000/adaptor/resources")
+		uri_check_resource = URI.parse("http://#{host}/adaptor/resources")
 		http = Net::HTTP.new(uri_check_resource.host, uri_check_resource.port)
 		request = Net::HTTP::Post.new(uri_check_resource.request_uri, 'Content-Type': 'application/json')
 		request.body = resource.to_json
@@ -87,7 +89,7 @@ def create_resource(spot)
 				}
 			}
 
-			uri_set_capability = URI.parse("http://localhost:8000/adaptor/resources/#{spot['uuid']}/data")
+			uri_set_capability = URI.parse("http://#{host}/adaptor/resources/#{spot['uuid']}/data")
 			http = Net::HTTP.new(uri_set_capability.host, uri_set_capability.port)
 			request = Net::HTTP::Post.new(uri_set_capability.request_uri, 'Content-Type': 'application/json')
 			request.body = capability.to_json
