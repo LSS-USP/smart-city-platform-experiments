@@ -15,6 +15,11 @@ As long as we use GKE's elastic features, you will need to create a new project
 and [enable billing](https://support.google.com/cloud/answer/6293499?hl=pt-br#enable-billing)
 for it.
 
+You must also increase the quota assigned for your project to create load balacers.
+By default, GKE will allocate a number of "In-use IP addresses" equal to the
+number of VMs in your cluster. However, you will need to expose the InterSCity
+through Kong service for testing and experiments.
+
 * Perform the following steps to install gcloud SDK:
 ```sh
 # Create an environment variable for the correct distribution
