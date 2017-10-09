@@ -1,0 +1,254 @@
+LAYOUT PESQUISA ORIGEM DESTINO 2007;;; ;;;
+;Variável;Conteúdo;Início;Fim;Compr;Códigos
+;;;;;;
+1;ZONA;Zona do Domicílio;1;3;3;1 a 460
+2;MUNI_DOM;Município  de Domicílio;4;5;2;1 a 39
+3;CO_DOM_X;Coordenada X Domicílio;6;17;12;12 dígitos 2 casas decimais
+4;CO_DOM_Y;Coordenada Y Domicílio;18;29;12;12 dígitos 2 casas decimais
+5;ID_DOM;Identifica Domicílio;30;36;7;
+6;F_DOM;Identifica Primeiro Registro do Domicílio;37;37;1;0 - Demais Registros
+;;;;;;1- Primeiro Registro do Domicílio
+7;FE_DOM;Fator de Expansão do Domicílio;38;47;10;10 dígitos 5 casas decimais
+8;DOM ;Número do Domicílio;48;51;4;
+9;CD_ENTRE;Código de Entrevista;52;52;1;5 - Completa sem Viagem 
+;;;;;;6 - Completa com Viagem
+10;DATA;Data da Entrevista;53;60;8;
+11;TIPO_DOM;Tipo de Domicílio;61;61;1;1 – Particular
+;;;;;;2 – Coletivo
+;;;;;;3 – Favela
+12;NO_MORAD;Total de Moradores no Domicílio;62;63;2;
+13;TOT_FAM;Total de Familias no Domicílio;64;65;2;
+14;ID_FAM;Identifica Família;66;74;9;
+15;F_FAM;Identifica Primeiro Registro da Família;75;75;1;0 - Demais Registros
+;;;;;;1- Primeiro Registro da Família
+16;FE_FAM;Fator de Expansão da Família;76;85;10;10 dígitos 5 casas decimais
+17;FAMILIA;Número da Família;86;87;2;
+18;NO_MORAF;Total de Moradores na Família;88;89;2;
+19;CONDMORA;Condição de Moradia;90;90;1;1 - Alugada
+;;;;;;2 - Própria
+;;;;;;3 - Cedida
+;;;;;;4 - Outros
+;;;;;;5 - Não Respondeu
+20;QT_RADIO;Rádios;91;91;1;
+21;QT_GEL1;Geladeiras de 1 porta;92;92;1;
+22;QT_GEL2;Geladeiras de 2 portas;93;93;1;
+23;QT_TVCOR;Tv. a Cores;94;94;1;
+24;QT_FREEZ;Freezer;95;95;1;
+25;QT_VIDEO;Vídeo Cassetes/DVD;96;96;1;
+26;QT_BANHO;Banheiros;97;97;1;
+27;QT_MOTO;Motos;98;98;1;
+28;QT_AUTO;Automóveis;99;99;1;
+29;QT_ASPIR;Aspiradores de Pó;100;100;1;
+30;QT_MLAVA;Máquinas de Lavar;101;101;1;
+31;QT_EMPRE;Empregados Domésticos;102;102;1;
+32;QT_MICRO;Microcomputadores;103;103;1;
+33;QT_BICICLE;Bicicletas;104;104;1;
+34;NAO_DCL_IT;Código de Declaração de Itens de Conforto;105;105;1;
+35;CRITERIO_B;Critério de Classificação Econômica Brasil;106;106;1;1 – A1
+;;;;;;2 – A2
+;;;;;;3 – B1
+;;;;;;4 – B2
+;;;;;;5 – C1
+;;;;;;6 – C2
+;;;;;;7 – D 
+;;;;;;8 – E
+36;ANO_AUTO1;Ano Fabricação - Auto 1;107;110;4;
+37;ANO_AUTO2;Ano Fabricação - Auto 2;111;114;4;
+38;ANO_AUTO3;Ano Fabricação - Auto 3;115;118;4;
+39;RENDA_FA;Renda Familiar;119;126;8;8 dígitos 2 casa decimais
+40;CD_RENFA;Código de Renda Familiar;127;127;1;1 - Renda Familiar Declarada e Maior que Zero
+;;;;;;2 – Renda Familiar Declarada como Zero
+;;;;;;3 - Renda Atribuída pelo Critério Brasil
+;;;;;;4 - Renda Atribuída pela Média da Zona
+41;ID_PESS;Identifica Pessoa;128;139;12;
+42;F_PESS;Identifica Primeiro Registro da Pessoa;140;140;1;0 - Demais registros
+;;;;;;1- Primeiro registro da pessoa
+43;FE_PESS;Fator de Expansão da Pessoa;141;150;10;10 dígitos 5 casas decimais
+44;PESSOA;Número da Pessoa;151;152;2;
+45;SIT_FAM;Situação Familiar;153;153;1;1 – Pessoa Responsável
+;;;;;;2 – Cônjuge/Companheiro(a)
+;;;;;;3 – Filho(a)/Enteado(a)
+;;;;;;4 - Outro Parente
+;;;;;;5 - Agregado
+;;;;;;6 - Empregado Residente
+;;;;;;7 - Parente do Empregado 
+46;IDADE;Idade;154;155;2;(anos)
+47;SEXO;Gênero;156;156;1;1 - Masculino
+;;;;;;2 - Feminino
+48;ESTUDA;Estuda Atualmente?;157;157;1;1 - Não
+;;;;;;2 - Creche/Pré-Escola
+;;;;;;3 - 1º Grau /Fundamental
+;;;;;;4 - 2º Grau/Médio
+;;;;;;6 – Superior/Universitário
+;;;;;;7 - Outros
+49;GRAU_INS;Grau de Instrução;158;158;1;1 - Não-Alfabetizado/Primário Incompleto
+;;;;;;2 - Primário Completo/Ginásio Incompleto
+;;;;;;3 - Ginásio Completo/Colegial Incompleto
+;;;;;;4 - Colegial Completo/Superior Incompleto
+;;;;;;5 - Superior Completo
+50;CD_ATIVI;Condição de Atividade;159;159;1;1 - Tem trabalho
+;;;;;;2 - Faz bico
+;;;;;;3 - Em Licença Médica
+;;;;;;4 - Aposentado/Pensionista
+;;;;;;5 - Sem Trabalho
+;;;;;;6 - Nunca Trabalhou
+;;;;;;7 - Dona de Casa
+;;;;;;8 - Estudante
+51;CO_REN_I;Condição de Renda Individual;160;160;1;1 - Tem Renda
+;;;;;;2 - Não Tem Renda
+;;;;;;3 - Não Respondeu
+52;VL_REN_I;Renda Individual;161;168;8;8 dígitos
+53;ZONA_ESC;Zona da Escola;169;171;3;1 a 460
+54;MUNIESC;Município da Escola;172;173;2;
+55;CO_ESC_X;Coordenada X Escola;174;185;12;12 dígitos 2 casas decimais
+56;CO_ESC_Y;Coordenada Y Escola;186;197;12;12 dígitos 2 casas decimais
+57;TIPO_ESC;Tipo de Escola;198;198;1;1 - Pública
+;;;;;;2 - Particular
+58;ZONATRA1;Zona do Primeiro Trabalho;199;201;3;1 a 460
+59;MUNITRA1;Município do Primeiro Trabalho;202;203;2;1 a 39
+60;CO_TR1_X;Coordenada X 1º Trabalho;204;215;12;12 dígitos 2 casas decimais
+61;CO_TR1_Y;Coordenada Y 1º Trabalho;216;227;12;12 dígitos 2 casas decimais
+62;TRAB1_RE;Primeiro Trabalho é igual a Residência ?;228;228;1;1 - Sim
+;;;;;;2 - Não
+;;;;;;3 – Sem endereço fixo
+63;TRABEXT1;Realiza Trabalho Externo-1º Trabalho;229;229;1;1 - Sim
+;;;;;;2 - Não
+64;OCUP1;Ocupação do 1º Trabalho;230;232;3;
+65;SETOR1;Setor de Atividade do 1º Trabalho;233;234;2;
+66;VINC1;Vínculo Empregatício do 1º Trabalho;235;235;1;1 - Assalariado com carteira
+;;;;;;2 - Assalariado sem carteira
+;;;;;;3 - Funcionário Público
+;;;;;;4 - Autônomo
+;;;;;;5 - Empregador
+;;;;;;6 - Profissional Liberal
+;;;;;;7 – Dono de Negócio Familiar
+;;;;;;8 - Trabalho Familiar
+67;ZONATRA2;Zona do Segundo Trabalho;236;238;3;1 a 460
+68;MUNITRA2;Município do Segundo Trabalho;239;240;2;1 a 39
+69;CO_TR2_X;Coordenada X 2º Trabalho;241;252;12;12 dígitos 2 casas decimais
+70;CO_TR2_Y;Coordenada Y 2º Trabalho;253;264;12;12 dígitos 2 casas decimais
+71;TRAB2_RE;Segundo Trabalho é igual a Residência ?;265;265;1;1 - Sim
+;;;;;;2 - Não
+;;;;;;3 – Sem endereço fixo
+72;TRABEXT2;Realiza Trabalho Externo 2º Trabalho;266;266;1;1 - Sim
+;;;;;;2 - Não
+73;OCUP2;Ocupação do 2º Trabalho;267;269;3;
+74;SETOR2;Setor de Atividade do 2º Trabalho;270;271;2;
+75;VINC2;Vínculo Empregatício do 2º Trabalho;272;272;1;idem ao 1º Trabalho
+76;N_VIAG;Número da Viagem;273;274;2;
+77;FE_VIA;Fator de Expansão da Viagem;275;284;10;10 dígitos 5 casas decimais
+78;DIA_SEM;Dia da Semana;285;285;1;2 - Segunda-Feira
+;;;;;;3 - Terça-Feira
+;;;;;;4 - Quarta-Feira
+;;;;;;5 - Quinta-Feira
+;;;;;;6 - Sexta-Feira
+79;TOT_VIAG;Total de Viagens da Pessoa;286;287;2;
+80;ZONA_O;Zona de Origem;288;290;3;1 a 460
+81;MUNI_O;Município de Origem;291;292;2;1 a 39
+82;CO_O_X;Coordenada X Origem;293;304;12;12 dígitos 2 casas decimais
+83;CO_O_Y;Coordenada Y Origem;305;316;12;12 dígitos 2 casas decimais
+84;ZONA_D;Zona de Destino;317;319;3;1 a 460
+85;MUNI_D;Município de Destino;320;321;2;1 a 39
+86;CO_D_X;Coordenada X Destino;322;333;12;12 dígitos 2 casas decimais
+87;CO_D_Y;Coordenada Y Destino;334;345;12;12 dígitos 2 casas decimais
+88;ZONA_T1;Zona da 1ª Transferência;346;348;3;1 a 460
+89;MUNI_T1;Município 1ª Transferência;349;350;2;1 a 39
+90;CO_T1_X;Coordenada X 1ª Transferência;351;362;12;12 dígitos 2 casas decimais
+91;CO_T1_Y;Coordenada Y 1ª Transferência;363;374;12;12 dígitos 2 casas decimais
+92;ZONA_T2;Zona da 2ª Transferência;375;377;3;1 a 460
+93;MUNI_T2;Município 2ª Transferência;378;379;2;1 a 39
+94;CO_T2_X;Coordenada X 2ª Transferência;380;391;12;12 dígitos 2 casas decimais
+95;CO_T2_Y;Coordenada Y 2ª Transferência;392;403;12;12 dígitos 2 casas decimais
+96;ZONA_T3;Zona da 3ª Transferência;404;406;3;1 a 460
+97;MUNI_T3;Município 3ª Transferência;407;408;2;1 a 39
+98;CO_T3_X;Coordenada X 3ª Transferência;409;420;12;12 dígitos 2 casas decimais
+99;CO_T3_Y;Coordenada Y 3ª Transferência;421;432;12;12 dígitos 2 casas decimais
+100;MOTIVO_O;Motivo na Origem;433;434;2;1 - Trabalho/Indústria
+;;;;;;2 - Trabalho/Comércio
+;;;;;;3 - Trabalho/Serviços
+;;;;;;4 - Educação
+;;;;;;5 - Compras
+;;;;;;6 - Saúde
+;;;;;;7 - Lazer
+;;;;;;8 - Residência
+;;;;;;9 – Procurar Emprego
+;;;;;;10 – Assuntos Pessoais
+101;MOTIVO_D;Motivo no Destino;435;436;2;idem ao anterior
+102;SERVIR_O;Servir Passageiro na Origem ;437;437;1;1 - Sim
+;;;;;;2 - Não
+103;SERVIR_D;Servir Passageiro no Destino;438;438;1;1 - Sim
+;;;;;;2 - Não
+104;MODO1;Modo 1;439;440;2;01 – Ônibus Município S.Paulo
+;;;;;;02 – Ônibus Outros Municípios
+;;;;;;03 – Ônibus Metropolitano
+;;;;;;04 - Ônibus Fretado
+;;;;;;05 - Escolar
+;;;;;;06 - Dirigindo Automóvel
+;;;;;;07 - Passageiro de Automóvel
+;;;;;;08 - Táxi
+;;;;;;09 – Microônibus/Van Município de S.Paulo
+;;;;;;10 – Microônibus/Van Outros Município
+;;;;;;11 – Microônibus/Van Metropolitano
+;;;;;;12 - Metrô
+;;;;;;13 - Trem
+;;;;;;14 - Moto
+;;;;;;15 - Bicicleta
+;;;;;;16 - A Pé
+;;;;;;17 - Outros
+105;MODO2;Modo 2;441;442;2;idem ao anterior
+106;MODO3;Modo 3;443;444;2;idem ao anterior
+107;MODO4;Modo 4;445;446;2;idem ao anterior
+108;H_SAIDA;Hora Saída;447;448;2;Hora de Saída
+109;MIN_SAIDA;Minuto Saída;449;450;2;Minuto de Saída
+110;ANDA_O;Tempo Andando na Origem;451;452;2;Em minutos
+111;H_CHEG;Hora Chegada;453;454;2;Hora de Chegada
+112;MIN_CHEG;Minuto Chegada;455;456;2;Minuto de Chegada
+113;ANDA_D;Tempo Andando no Destino;457;458;2;Em minutos
+114;DURACAO;Duração da Viagem (em minutos);459;461;3;
+115;MODOPRIN;Modo Principal;462;463;2;01 – Ônibus Município S.Paulo
+;;;;;;02 – Ônibus Outros Municípios
+;;;;;;03 – Ônibus Metropolitano
+;;;;;;04 - Ônibus Fretado
+;;;;;;05 - Escolar
+;;;;;;06 - Dirigindo Automóvel
+;;;;;;07 - Passageiro de Automóvel
+;;;;;;08 - Táxi
+;;;;;;09 – Microônibus/Van Município de S.Paulo
+;;;;;;10 – Microônibus/Van Outros Município
+;;;;;;11 – Microônibus/Van Metropolitano
+;;;;;;12 - Metrô
+;;;;;;13 - Trem
+;;;;;;14 - Moto
+;;;;;;15 - Bicicleta
+;;;;;;16 - A Pé
+;;;;;;17 - Outros
+116;TIPOVG;Tipo de Viagem ;464;464;1;1 - Coletivo
+;;;;;;2 - Individual
+;;;;;;3 - A pé
+117;PAG_VIAG;Quem Pagou a Viagem;465;465;1;1 – Você/Sua Família
+;;;;;;2 – Empregador
+;;;;;;3 - Isento
+;;;;;;4 - Outros
+118;TP_ESAUTO;Tipo de Estacionamento Automóvel;466;466;1;1 – Não Estacionou
+;;;;;;2 – Zona azul/Zona marrom
+;;;;;;3 – Patrocinado
+;;;;;;4 – Proprio
+;;;;;;5 – Meio-Fio
+;;;;;;6 – Avulso
+;;;;;;7 – Mensal
+;;;;;;8 – Não respondeu
+119;VL_EST;Valor do Estacionamento Automóvel;467;470;4;
+120;PE_BICI;Por Que Viajou A Pé ou Bicicleta;471;471;1;1 – Pequena Distância
+;;;;;;2 – Condução Cara
+;;;;;;3 – Ponto/Estação Distante
+;;;;;;4 – Condução Demora a Passar
+;;;;;;5 – Viagem Demorada
+;;;;;;6 – Condução Lotada
+;;;;;;7 – Atividade Física
+;;;;;;8 – Outros Motivos
+121;TP_ESBICI;Estacionamento Bicicleta;472;472;1;1 – Bicicletário Gratuito
+;;;;;;2 – Bicicletário Pago
+;;;;;;3 – Local Privado
+;;;;;;4 – Rua/Local Público
+;;;;;;5 – Outros
+122;ID_ORDEM;Número de Ordem do Registro;473;478;6;1 a 196.698

@@ -87,34 +87,49 @@ end
 people.sort_by! {|person| person[:arrive_time]}
 
 prev = nil
+init_hour = 0
+init_min = 0
+end_hour = 0
+end_min = 30
+init_time = Time.utc(2007, 4, 30, init_hour, init_min, 0)
+end_time = Time.utc(2007, 4, 30, end_hour, end_min, 0)
+
+#TODO => Agregar por cada meia hora
 summary_data = []
+summary_data << {factor: 0, label: "#{init_time.hour}:#{init_time.min}"}
+
 people.each do |person|
   data = {}
   reason = person[:reason_destiny].to_i
   next if(reason == 8) # Voltando pra Casa
 
-  if prev && person[:arrive_time] == prev
+  if(person[:arrive_time] >= init_time && person[:arrive_time] < end_time)
     data = summary_data.last
     data[:factor] += person[:factor]
   else
-    summary_data << person.delete_if {|k,v| ![:arrive_hour, :arrive_minute, :arrive_time, :factor].include?(k) }
+    init_time += (30*60)
+    end_time += (30*60)
+    summary_data << {factor: person[:factor]}
+    summary_data.last[:label] = "#{init_time.hour}:#{init_time.min}"
   end
-  prev = person[:arrive_time]
 end
 
 
 puts "Generating charts"
-g = Gruff::Bar.new
+g = Gruff::Bar.new("1600x800")
 g.title = 'Expected workload'
 i = 0
 g.labels = {}
 datasets = []
 summary_data.each do |data|
-  g.labels[i] = data[:arrive_time]
+  g.labels[i] = data[:label]
   datasets << data[:factor]
   i += 1
 end
 g.data('drivers', datasets)
+g.legend_font_size = 10
+g.marker_font_size = 6
+g.spacing_factor = 0.5
 g.write('output_bar.png')
 
 output_full = "sorted_drivers.csv" 
