@@ -6,6 +6,8 @@ CLUSTER=cluster-xp
 ZONE=us-central1-f
 MACHINE_TYPE=n1-standard-1
 NUM_NODES=8
+MIN_NODES=6
+MAX_NODES=40
 
 verify () {
   if [ $? != 0 ]; then
@@ -17,7 +19,7 @@ verify () {
 create_cluster () {
   echo "Creating the cluster"
 
-  gcloud container clusters create $CLUSTER --zone $ZONE --machine-type $MACHINE_TYPE --num-nodes $NUM_NODES --preemptible
+  gcloud beta container clusters create $CLUSTER --zone $ZONE --machine-type $MACHINE_TYPE --num-nodes $NUM_NODES --preemptible --enable-autoscaling --min-nodes=$MIN_NODES --max-nodes=$MAX_NODES
   #gcloud deployment-manager deployments create cluster --config cluster/cluster.yaml 
   gcloud container clusters get-credentials $CLUSTER 
 }
@@ -70,6 +72,7 @@ create_pods () {
   done
 
   create_interscity_services
+  enable_autoscaling
 
   echo "======== Current Status ==========="
   kubectl get svc,pods
@@ -127,6 +130,14 @@ create_interscity_services() {
   kubectl create -f kubernetes/resource-discoverer.yaml
 }
 
+enable_autoscaling(){
+  kubectl autoscale deployment data-collector --cpu-percent=70 --min=2 --max=10
+  kubectl autoscale deployment resource-adaptor --cpu-percent=70 --min=2 --max=10
+  kubectl autoscale deployment resource-discoverer --cpu-percent=70 --min=2 --max=10
+  kubectl autoscale deployment resource-catalog --cpu-percent=70 --min=2 --max=10
+  kubectl autoscale deployment kong-rc --cpu-percent=70 --min=3 --max=10
+}
+
 delete_cluster() {
   echo "Deleting the cluster"
   yes | gcloud container clusters delete $CLUSTER --zone $ZONE
@@ -151,6 +162,35 @@ delete_cluster() {
     echo "Fowarding-rules: $name"
     yes | gcloud compute forwarding-rules delete $name --region=us-central1
   done
+
+  echo "Deleting backend-services"
+  names=`gcloud compute backend-services list | sed -n '1!p' | while read -r instance; do printf $instance | awk '{print $1}'; done`
+  for name in $names; do
+    echo "Backend-services: $name"
+    yes | gcloud compute backend-services delete $name --region=us-central1
+  done
+
+  echo "Deleting Health checks"
+  names=`gcloud compute health-checks list | sed -n '1!p' | while read -r instance; do printf $instance | awk '{print $1}'; done`
+  for name in $names; do
+    echo "health-checks: $name"
+    yes | gcloud compute health-checks delete $name
+  done
+
+  echo "Deleting target-pools"
+  names=`gcloud compute target-pools list | sed -n '1!p' | while read -r instance; do printf $instance | awk '{print $1}'; done`
+  for name in $names; do
+    echo "Target Pools: $name"
+    yes | gcloud compute target-pools delete $name
+  done
+
+  echo "Deleting firewall-rules"
+  names=`gcloud compute firewall-rules list | sed -n '1!p' | while read -r instance; do printf $instance | awk '{print $1}'; done`
+  for name in $names; do
+    echo "Fowarding-rules: $name"
+    yes | gcloud compute firewall-rules delete $name
+  done
+
 }
 
 delete_pods() {
