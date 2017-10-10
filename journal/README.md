@@ -79,3 +79,5 @@ nodeSelector:
 * Rails APP
   * https://engineering.adwerx.com/rails-on-docker-compose-7e2cf235fa0e
   * https://engineering.adwerx.com/rails-on-kubernetes-8cd4940eacbe
+* Autoscaling
+  * http://blog.kubernetes.io/2016/07/autoscaling-in-kubernetes.html
