@@ -137,6 +137,20 @@ delete_cluster() {
     echo "Disk: $name"
     yes | gcloud compute disks delete $name
   done
+
+  echo "Deleting addresses"
+  names=`gcloud compute addresses list | sed -n '1!p' | while read -r instance; do printf $instance | awk '{print $1}'; done`
+  for name in $names; do
+    echo "Address: $name"
+    yes | gcloud compute addresses delete $name
+  done
+
+  echo "Deleting fowarding-rules"
+  names=`gcloud compute forwarding-rules list | sed -n '1!p' | while read -r instance; do printf $instance | awk '{print $1}'; done`
+  for name in $names; do
+    echo "Fowarding-rules: $name"
+    yes | gcloud compute forwarding-rules delete $name --region=us-central1
+  done
 }
 
 delete_pods() {
