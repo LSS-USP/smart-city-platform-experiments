@@ -73,6 +73,10 @@ spec:
             secretKeyRef:
               name: rabbitmq-config
               key: erlang-cookie
+        resources:
+          requests:
+            memory: "300M"
+            cpu: "0.2"
         ports:
         - containerPort: 5672
           name: amqp

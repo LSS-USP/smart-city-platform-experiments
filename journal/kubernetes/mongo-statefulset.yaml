@@ -48,6 +48,10 @@ spec:
             - rs0
             - "--smallfiles"
             - "--noprealloc"
+          resources:
+            requests:
+              memory: "200M"
+              cpu: "0.2"
           ports:
             - containerPort: 27017
           volumeMounts:

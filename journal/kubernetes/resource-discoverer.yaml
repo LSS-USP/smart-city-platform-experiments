@@ -62,3 +62,7 @@ spec:
                 fieldRef:
                   fieldPath: status.podIP
           command: [ "/bin/sh", "-c", "export SELF_HOST=$MY_POD_IP:3000 && bundle exec rails s -p 3000 -b 0.0.0.0" ]
+          resources:
+            requests:
+              memory: "200M"
+              cpu: "0.2"

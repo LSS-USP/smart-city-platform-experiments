@@ -99,6 +99,10 @@ spec:
             value: "/dev/stderr"
           - name: KONG_ADMIN_ERROR_LOG
             value: "/dev/stderr"  
+        resources:
+          requests:
+            memory: "200M"
+            cpu: "0.2"
         ports:
         - name: admin
           containerPort: 8001

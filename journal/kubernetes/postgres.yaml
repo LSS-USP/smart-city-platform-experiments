@@ -35,6 +35,10 @@ spec:
               value: kong
             - name: PGDATA
               value: /var/lib/postgresql/data/pgdata
+          resources:
+            requests:
+              memory: "200M"
+              cpu: "0.2"
           ports:
             - containerPort: 5432
           volumeMounts:
