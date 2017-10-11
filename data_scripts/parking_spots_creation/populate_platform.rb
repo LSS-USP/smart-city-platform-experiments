@@ -1,7 +1,7 @@
 require 'net/http'
 require 'uri'
 require 'json'
-require 'xmlsimple'
+require 'nokogiri'
 
 puts "[I] Check if parking_monitoring capability exists"
 
@@ -39,31 +39,31 @@ end
 
 puts "[I] Parsing park.xml file"
 
-content = XmlSimple.xml_in('park.xml')
+content = File.open("park.xml") { |f| Nokogiri::XML(f) }
 
 
 def create_resource(spot, host)
 
-	puts "[I] Check if parking spot #{spot['uuid']} exists"
+  puts "[I] Check if parking spot #{spot.attr('uuid')} exists"
 
-	uri_check_resource = URI.parse("http://#{host}/catalog/resources/#{spot['uuid']}")
+	uri_check_resource = URI.parse("http://#{host}/catalog/resources/#{spot.attr('uuid')}")
 	http = Net::HTTP.new(uri_check_resource.host, uri_check_resource.port)
 	request = Net::HTTP::Get.new(uri_check_resource.request_uri, 'Content-Type': 'application/json')
 	response = http.request(request)
 
 	if response.code == "404"
-		puts "[I] Create parking spot #{spot['uuid']}\n"
+		puts "[I] Create parking spot #{spot.attr('uuid')}\n"
 
 		resource = {
 			data: {
 				description: "Parking Spot",
-				uuid: spot['uuid'],
+				uuid: spot.attr('uuid'),
 				capabilities: [
 					"parking_monitoring"
 				],
 				status: "active",
-				lat: spot['lat'],
-				lon: spot['lon']
+				lat: spot.attr('lat'),
+				lon: spot.attr('lon')
 			}
 		}
 		
@@ -74,9 +74,9 @@ def create_resource(spot, host)
 		response = http.request(request)
 		
 		if response.code == "422"
-			puts "[E] The parking spot #{spot['uuid']} was not created"
+			puts "[E] The parking spot #{spot.attr('uuid')} was not created"
 		else
-			puts "[I] Setting parking spot #{spot['uuid']} as available\n"
+			puts "[I] Setting parking spot #{spot.attr('uuid')} as available\n"
 
 			capability = {
 				data: {
@@ -89,14 +89,14 @@ def create_resource(spot, host)
 				}
 			}
 
-			uri_set_capability = URI.parse("http://#{host}/adaptor/resources/#{spot['uuid']}/data")
+			uri_set_capability = URI.parse("http://#{host}/adaptor/resources/#{spot.attr('uuid')}/data")
 			http = Net::HTTP.new(uri_set_capability.host, uri_set_capability.port)
 			request = Net::HTTP::Post.new(uri_set_capability.request_uri, 'Content-Type': 'application/json')
 			request.body = capability.to_json
 			response = http.request(request)
 
 			if response.code == "422"
-				puts "[E] Capability from spot #{spot['uuid']} not setted"
+				puts "[E] Capability from spot #{spot.attr('uuid')} not setted"
 			end
 		end
 
@@ -134,7 +134,10 @@ end
 
 pool = ThreadPool.new(size: 5)
 
-content["spot"].each do |spot|
+
+spots = content.xpath('//spot')
+
+spots.each do |spot|
 	pool.schedule { create_resource(spot, host) }
 end
 
