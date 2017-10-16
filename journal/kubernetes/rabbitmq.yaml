@@ -75,8 +75,10 @@ spec:
               key: erlang-cookie
         resources:
           requests:
-            memory: "300M"
+            memory: "700M"
             cpu: "0.2"
+          limits:
+            memory: "2.5G"
         ports:
         - containerPort: 5672
           name: amqp

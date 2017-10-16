@@ -49,7 +49,7 @@ metadata:
   name: stolon-keeper
 spec:
   serviceName: "stolon-keeper"
-  replicas: 2
+  replicas: 4
   template:
     metadata:
       labels:
@@ -123,7 +123,7 @@ kind: ReplicationController
 metadata:
   name: stolon-proxy
 spec:
-  replicas: 2
+  replicas: 3
   selector:
     name: stolon-proxy
   template:

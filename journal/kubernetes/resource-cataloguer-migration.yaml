@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: resource-cataloguer-migration
-        image: arthurmde/resource-cataloguer:0.2-0.2-exp2
+        image: arthurmde/resource-cataloguer:0.2-0.3-exp2
         env:
           - name: POSTGRES_USER
             value: stolon

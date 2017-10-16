@@ -31,7 +31,7 @@ spec:
         cloud.google.com/gke-nodepool: default-pool
       containers:
         - name: resource-adaptor
-          image: arthurmde/resource-adaptor:0.2-0.2-exp2
+          image: arthurmde/resource-adaptor:0.2-0.3-exp2
           ports:
             - containerPort: 3000
           livenessProbe:
@@ -69,7 +69,7 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.podIP
-          command: [ "/bin/sh", "-c", "export SELF_HOST=$MY_POD_IP:3000 && bundle exec rails s -p 3000 -b 0.0.0.0" ]
+          command: [ "/bin/sh", "-c", "rm tmp/pids/server.pid && export SELF_HOST=$MY_POD_IP:3000 && bundle exec rails s -p 3000 -b 0.0.0.0" ]
           resources:
             requests:
               memory: "200M"

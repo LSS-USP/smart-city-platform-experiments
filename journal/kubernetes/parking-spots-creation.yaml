@@ -1,0 +1,20 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: parking-spots-creation
+spec:
+  template:
+    metadata:
+      name: parking-spots-creation
+    spec:
+      containers:
+      - name: parking-spots-creation
+        image: arthurmde/parking-spots-creation:0.1-0.1-exp2
+        env:
+          - name: INTERSCITY_HOST
+            value: 'kong-proxy:8000'
+        resources:
+          requests:
+            memory: "2G"
+            cpu: "0.3"
+      restartPolicy: Never

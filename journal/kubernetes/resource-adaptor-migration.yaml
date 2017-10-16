@@ -9,7 +9,7 @@ spec:
     spec:
       containers:
       - name: resource-adaptor-migration
-        image: arthurmde/resource-adaptor:0.2-0.2-exp2
+        image: arthurmde/resource-adaptor:0.2-0.3-exp2
         env:
           - name: POSTGRES_USER
             value: stolon
