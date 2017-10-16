@@ -130,6 +130,16 @@ create_interscity_services() {
   kubectl create -f kubernetes/resource-discoverer.yaml
 }
 
+create_simulator() {
+  gcloud container node-pools create simulator-pool --machine-type=n1-standard-16  --num-nodes=1 --cluster=$CLUSTER --preemptible
+
+  #echo "Deploying Simulator"
+  #kubectl create -f kubernetes/simulator.yaml
+
+  #echo "Run Experiment"
+  #kubectl create -f kubernetes/experiment.yaml
+}
+
 enable_autoscaling(){
   kubectl autoscale deployment data-collector --cpu-percent=70 --min=2 --max=10
   kubectl autoscale deployment resource-adaptor --cpu-percent=70 --min=2 --max=10
