@@ -95,6 +95,7 @@ create_interscity_services() {
   echo "Deleting job of resource-cataloguer database migration"
   kubectl delete -f kubernetes/resource-cataloguer-migration.yaml
 
+
   echo "Deploying Resource Cataloguer"
   kubectl create -f kubernetes/resource-cataloguer.yaml
 
@@ -120,6 +121,11 @@ create_interscity_services() {
   kubectl create -f kubernetes/resource-adaptor.yaml
 
   #=====================================================================
+
+  echo "Restoring MongoDB for DataCollector"
+  pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep mongo | head -1`
+  kubectl exec -i $pod_name wget https://www.ime.usp.br/~esposte/documents/interscity-experiments/data-collector-backup.tar.gz -O /tmp/data-collector-backup.tar.gz
+  kubectl exec -i $pod_name gunzip -c /tmp/resource_cataloguer_development.tar.gz | mongorestore data-collector-backup -d data_collector_development
 
   echo "Deploying Data Collector"
   kubectl create -f kubernetes/data-collector.yaml
