@@ -34,8 +34,8 @@ spec:
           rake db:create;
           apt-get update;
           apt-get install wget -y;
-          wget https://www.ime.usp.br/~esposte/documents/interscity-experiments/resource_cataloguer_development-2017-10-25.tar.gz -O /tmp/resource_cataloguer_development.tar.gz;
-          gunzip /tmp/resource_cataloguer_development.tar.gz -d /tmp/resource_cataloguer_development.tar;
-          pg_restore -C -d resource_cataloguer_development -h stolon-proxy-service -p 5432 -U stolon /tmp/resource_cataloguer_development.tar;
+          wget https://www.ime.usp.br/~esposte/documents/interscity-experiments/resource_cataloguer_development.dump -O /tmp/resource_cataloguer_development.dump;
+          echo "Restoring...";
+          pg_restore --clean --if-exists --no-acl --no-owner --dbname=resource_cataloguer_development --verbose -h stolon-proxy-service -U stolon /tmp/resource_cataloguer_development.dump;
           rake db:migrate;
       restartPolicy: Never
