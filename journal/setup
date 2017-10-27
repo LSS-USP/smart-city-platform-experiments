@@ -121,11 +121,15 @@ create_interscity_services() {
   kubectl create -f kubernetes/resource-adaptor.yaml
 
   #=====================================================================
-
+  
   echo "Restoring MongoDB for DataCollector"
-  pod_name=`kubectl get pods -o go-template --template '{{range .items}}{{.metadata.name}}{{"\n"}}{{end}}' | grep mongo | head -1`
-  kubectl exec -i $pod_name wget https://www.ime.usp.br/~esposte/documents/interscity-experiments/data-collector-backup.tar.gz -O /tmp/data-collector-backup.tar.gz
-  kubectl exec -i $pod_name gunzip -c /tmp/resource_cataloguer_development.tar.gz | mongorestore data-collector-backup -d data_collector_development
+
+  kubectl exec -it mongo-0 -- apt-get update
+  kubectl exec -it mongo-0 -- apt-get install wget -y;
+  kubectl exec -it mongo-0 -- wget https://www.ime.usp.br/~esposte/documents/interscity-experiments/data-collector-backup.tar.gz -O /tmp/data-collector-backup.tar.gz;
+  kubectl exec -it mongo-0 -- tar -zxvf /tmp/data-collector-backup.tar.gz -C /tmp/;
+  kubectl exec -it mongo-0 -- mongorestore --drop --db data_collector_development /tmp/tmp/data_collector_development -h mongo
+
 
   echo "Deploying Data Collector"
   kubectl create -f kubernetes/data-collector.yaml
