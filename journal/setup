@@ -141,10 +141,10 @@ create_interscity_services() {
 }
 
 create_simulator() {
-  gcloud container node-pools create simulator-pool --machine-type=n1-standard-16  --num-nodes=1 --cluster=$CLUSTER --preemptible
+  gcloud container node-pools create simulator-pool --machine-type=n1-standard-8  --num-nodes=1 --cluster=$CLUSTER --preemptible
 
-  #echo "Deploying Simulator"
-  #kubectl create -f kubernetes/simulator.yaml
+  echo "Deploying Simulator"
+  kubectl create -f kubernetes/simulator.yaml
 
   #echo "Run Experiment"
   #kubectl create -f kubernetes/experiment.yaml
@@ -156,6 +156,16 @@ enable_autoscaling(){
   kubectl autoscale deployment resource-discoverer --cpu-percent=70 --min=2 --max=10
   kubectl autoscale deployment resource-catalog --cpu-percent=70 --min=2 --max=10
   kubectl autoscale deployment kong-rc --cpu-percent=70 --min=3 --max=10
+}
+
+delete_simulator() {
+  gcloud container node-pools delete simulator-pool --cluster=$CLUSTER
+
+  echo "Deploying Simulator"
+  kubectl delete -f kubernetes/simulator.yaml
+
+  #echo "Run Experiment"
+  #kubectl create -f kubernetes/experiment.yaml
 }
 
 delete_cluster() {
@@ -275,4 +285,12 @@ fi
 
 if [ "$1" = "delete-pods" ]; then
   delete_pods
+fi
+
+if [ "$1" = "run" ]; then
+  create_simulator
+fi
+
+if [ "$1" = "stop" ]; then
+  delete_simulator
 fi

@@ -1,0 +1,36 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: org
+spec:
+  selector:
+    name: simulator
+  clusterIP: None
+
+---
+apiVersion: extensions/v1beta1
+kind: Deployment
+metadata:
+  name: simulator
+  labels:
+    name: simulator
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: simulator
+        name: simulator
+    spec:
+      hostname: simulator
+      subdomain: org
+      nodeSelector:
+        cloud.google.com/gke-nodepool: simulator-pool
+      containers:
+      - name: simulator
+        image: ezambomsantana/interscsimulator:latest
+        workingDir: /src/mock-simulators/smart_city_model/src
+        env:
+        - name: USER
+          value: "root"
+        command: [ "/bin/sh", "-c", "hostname && make smart_city_run CMD_LINE_OPT='--batch'" ]
