@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: org
+  name: simulator
 spec:
   selector:
     name: simulator
@@ -22,7 +22,6 @@ spec:
         app: simulator
         name: simulator
     spec:
-      hostname: simulator
       subdomain: org
       nodeSelector:
         cloud.google.com/gke-nodepool: simulator-pool
@@ -34,3 +33,4 @@ spec:
         - name: USER
           value: "root"
         command: [ "/bin/sh", "-c", "hostname && make smart_city_run CMD_LINE_OPT='--batch'" ]
+        tty: true
