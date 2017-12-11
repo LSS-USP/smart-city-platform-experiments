@@ -10,7 +10,7 @@ if(length(args)!=2) {
 require("ggplot2")
 
 data[c('request', 'answer')] <- sapply(data[c('request', 'answer')], function(x) strptime(x, "%Y-%m-%dT%H:%M:%S"))
-data['result'] <- sapply(data['result'], function(x) factor(x))
+data[c('result', 'description')] <- sapply(data[c('result', 'description')], function(x) factor(x))
 data['simulation_time'] <- sapply(data['simulation_time'], function(x) as.numeric(x))
 
 convert_time <- function(x) {
